@@ -1,56 +1,185 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FRAGGEAR</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FragGear | Built for Champions</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #0a0f25 url('https://images.unsplash.com/photo-1606813902934-6c2b01a2d506?fit=crop&w=1950&q=80') no-repeat center center / cover;
+      color: #eee;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header img {
+      height: 60px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: #00ffff;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ff00ff;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 5rem 1rem;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      background: rgba(0,0,0,0.6);
+      margin: 2rem;
+      border-radius: 10px;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #00ffff;
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .product-card h3 {
+      color: #00ffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card p {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card .price {
+      color: #0f0;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-card button {
+      background: #00ffff;
+      color: #000;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .product-card button:hover {
+      background: #ff00ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      background: rgba(0,0,0,0.7);
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="#mouse">Mouse</a></li>
-        <li><a href="#klavye">Klavye</a></li>
-        <li><a href="#kolluk">Kolluk</a></li>
-        <li><a href="#elisitmasi">El Isıtması</a></li>
-        <li><a href="#mousepad">Mousepad</a></li>
-      </ul>
-    </nav>
-    <button id="backButton">↑</button>
-  </header>
 
-  <section class="hero">
-    <h1>FRAGGEAR</h1>
-    <p>Built for champions.</p>
-    <button id="shopNow">Shop Now</button>
-  </section>
+<header>
+  <img src="GITHUB_REPO_URL/logo.png" alt="FragGear Logo"> <!-- Buraya logo görselinin URL'sini koy -->
+  <nav>
+    <ul>
+      <li><a href="#products">Ürünler</a></li>
+      <li><a href="#about">Hakkımızda</a></li>
+      <li><a href="#contact">İletişim</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <section id="mouse" class="product-category">
-    <h2>Mouse</h2>
-    <img src="https://via.placeholder.com/300x150?text=Mouse" alt="Mouse örnek" />
-  </section>
+<section class="hero">
+  <h1>Built for Champions</h1>
+  <p>Profesyonel e-sporcular için premium ekipman</p>
+</section>
 
-  <section id="klavye" class="product-category">
-    <h2>Klavye</h2>
-    <img src="https://via.placeholder.com/300x150?text=Klavye" alt="Klavye örnek" />
-  </section>
+<section class="products" id="products">
 
-  <section id="kolluk" class="product-category">
-    <h2>Kolluk</h2>
-    <img src="https://via.placeholder.com/300x150?text=Kolluk" alt="Kolluk örnek" />
-  </section>
+  <div class="product-card">
+    <img src="GITHUB_REPO_URL/keyboard.png" alt="Klavye">
+    <h3>FragGear Klavye</h3>
+    <p>RGB mekanik, hızlı tepki</p>
+    <div class="price">₺1.299</div>
+    <button>Sepete Ekle</button>
+  </div>
 
-  <section id="elisitmasi" class="product-category">
-    <h2>El Isıtması</h2>
-    <img src="https://via.placeholder.com/300x150?text=El+Isıtması" alt="El Isıtması örnek" />
-  </section>
+  <div class="product-card">
+    <img src="GITHUB_REPO_URL/mouse.png" alt="Mouse">
+    <h3>FragGear Mouse</h3>
+    <p>16K DPI, ultra hafif</p>
+    <div class="price">₺899</div>
+    <button>Sepete Ekle</button>
+  </div>
 
-  <section id="mousepad" class="product-category">
-    <h2>Mousepad</h2>
-    <img src="https://via.placeholder.com/300x150?text=Mousepad" alt="Mousepad örnek" />
-  </section>
+  <div class="product-card">
+    <img src="GITHUB_REPO_URL/mousepad.png" alt="Mousepad">
+    <h3>FragGear Mousepad</h3>
+    <p>Kaymaz taban, geniş yüzey</p>
+    <div class="price">₺199</div>
+    <button>Sepete Ekle</button>
+  </div>
 
-  <script src="script.js"></script>
+</section>
+
+<footer>
+  &copy; 2025 FragGear. Tüm hakları saklıdır.
+</footer>
+
 </body>
 </html>
