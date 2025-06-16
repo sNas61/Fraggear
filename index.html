@@ -1,158 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FRAGGEAR</title>
-  <style>
-    :root {
-      --bg: #0a0a0a;
-      --text: #f0f0f0;
-      --accent: #00cfcf;
-      --footer: #111;
-    }
-    body.light {
-      --bg: #f0f0f0;
-      --text: #0a0a0a;
-      --accent: #007777;
-      --footer: #ddd;
-    }
-    body {
-      margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.9);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 30px;
-      box-sizing: border-box;
-      z-index: 1000;
-    }
-    header img {
-      height: 60px;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-    }
-    nav a {
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 1.1em;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: #00ffff;
-    }
-    section {
-      display: none;
-      padding: 100px 30px 60px;
-      max-width: 1200px;
-      margin: auto;
-      text-align: center;
-    }
-    section.active {
-      display: block;
-      animation: fadeIn 0.5s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    h1 {
-      font-size: 4em;
-      margin-bottom: 10px;
-    }
-    .slogan {
-      font-size: 1.7em;
-      color: var(--accent);
-    }
-    .products-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
-      margin-top: 40px;
-    }
-    .product {
-      background: rgba(17, 17, 17, 0.85);
-      padding: 10px;
-      border-radius: 10px;
-      width: 220px;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-    }
-    .product:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px var(--accent);
-    }
-    .product img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    footer {
-      background: var(--footer);
-      color: #888;
-      padding: 20px;
-      font-size: 0.9em;
-      text-align: center;
-      position: relative;
-      bottom: 0;
-      width: 100%;
-    }
-    .back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: var(--accent);
-      color: var(--bg);
-      border-radius: 6px;
-      text-decoration: none;
-      position: relative;
-      overflow: hidden;
-    }
-    .back-btn::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, var(--accent) 10%, transparent 10.01%);
-      background-size: 10% 10%;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .back-btn:hover::after {
-      opacity: 0.4;
-      animation: neon 1s infinite linear;
-    }
-    @keyframes neon {
-      0% { background-position: 0 0; }
-      100% { background-position: 100% 100%; }
-    }
-    .theme-toggle {
-      cursor: pointer;
-      font-size: 1.5em;
-      margin-left: 20px;
-      color: var(--accent);
-      transition: color 0.3s;
-    }
-    .theme-toggle:hover {
-      color: #00ffff;
-    }
-  </style>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>FRAGGEAR</title>
@@ -368,48 +216,230 @@
     cursor: default;
   }
 </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FRAGGEAR</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background: #0a0a0a;
+      color: #f0f0f0;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 30px;
+      box-sizing: border-box;
+      z-index: 1000;
+    }
+    header img {
+      height: 60px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+    nav a {
+      color: #00cfcf;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #00ffff;
+    }
+    #hamburger {
+      cursor: pointer;
+      font-size: 2em;
+      user-select: none;
+    }
+    #sidebar {
+      position: fixed;
+      right: -250px;
+      top: 0;
+      width: 250px;
+      height: 100%;
+      background: #111;
+      padding: 20px;
+      box-sizing: border-box;
+      transition: right 0.3s;
+      z-index: 999;
+    }
+    #sidebar.active {
+      right: 0;
+    }
+    #sidebar a {
+      display: block;
+      color: #00cfcf;
+      margin: 15px 0;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 100px 30px 60px;
+      max-width: 1200px;
+      margin: auto;
+      text-align: center;
+    }
+    #category-page, #about, #contact, #products {
+      display: none;
+    }
+    h1 {
+      font-size: 4em;
+      margin-bottom: 10px;
+    }
+    .slogan {
+      font-size: 1.7em;
+      color: #00cfcf;
+    }
+    .products-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .product {
+      background: rgba(17, 17, 17, 0.85);
+      padding: 10px;
+      border-radius: 10px;
+      width: 220px;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+    .product:hover {
+      transform: scale(1.05);
+    }
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #00cfcf;
+      color: #000;
+      border-radius: 6px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: rgba(0,255,255,0.2);
+      transform: rotate(45deg);
+      transition: all 0.3s;
+    }
+    .btn:hover::before {
+      top: 0;
+      left: 0;
+    }
+    footer {
+      background: #111;
+      color: #888;
+      padding: 20px;
+      font-size: 0.9em;
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
 </head>
 <body>
 
-@@ -162,12 +225,16 @@
+@@ -225,20 +152,19 @@
 <a href="#" onclick="showSection('about')">HAKKINDA</a>
 </nav>
 <a href="#" onclick="showSection('home')">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo">
     <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo" style="height:60px">
+    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo">
 </a>
 <nav>
-<a href="#" onclick="showSection('contact')">İLETİŞİM</a>
-<a href="#" onclick="showSection('support')">MÜŞTERİ HİZMETLERİ</a>
-    <span class="theme-toggle" onclick="toggleTheme()">🌙</span>
+    <a href="#" onclick="showSection('contact')">İLETİŞİM</a>
+    <a href="#" onclick="showSection('support')">MÜŞTERİ HİZMETLERİ</a>
 
     <span id="user-control">
       <a class="user-btn" onclick="openModal('login')">Giriş Yap</a>
       <a class="user-btn" onclick="openModal('register')">Kayıt Ol</a>
     </span>
+    <div id="hamburger" onclick="toggleSidebar()">☰</div>
 </nav>
 </header>
 
-@@ -180,15 +247,15 @@ <h1>FRAGGEAR</h1>
+<section id="home" class="active">
+<div id="sidebar">
+  <a href="#" onclick="showLogin()">GİRİŞ YAP</a>
+  <a href="#" onclick="showRegister()">KAYIT OL</a>
+</div>
+
+<section id="home">
+<h1>FRAGGEAR</h1>
+<p class="slogan">DESIGNED FOR CHAMPIONS</p>
+</section>
+@@ -247,15 +173,15 @@ <h1>FRAGGEAR</h1>
 <h2>ÜRÜN KATEGORİLERİ</h2>
 <div class="products-list">
 <div class="product" onclick="loadCategory('klavye')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye">
       <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye" />
+      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye">
 <p>Klavye</p>
 </div>
 <div class="product" onclick="loadCategory('mouse')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse">
       <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse" />
+      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse">
 <p>Mouse</p>
 </div>
 <div class="product" onclick="loadCategory('mousepad')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad">
       <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad" />
+      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad">
 <p>Mousepad</p>
 </div>
 </div>
-@@ -224,39 +291,148 @@ <h2 id="cat-title"></h2>
+@@ -264,175 +190,83 @@ <h2>ÜRÜN KATEGORİLERİ</h2>
+<section id="about">
+<h2>HAKKINDA</h2>
+<p>FRAGGEAR esporcular için premium donanım sunar. Kalite ve performans odağındayız.</p>
+  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
+  <a href="#" class="btn" onclick="showSection('home')">Ana Menüye Dön</a>
+</section>
+
+<section id="contact">
+<h2>İLETİŞİM</h2>
+<p>Telefon: 0535 049 5006</p>
+<p>Email: tahacanoktar11@gmail.com</p>
+  <p>Instagram: <a href="https://instagram.com/" target="_blank" style="color:var(--accent);">@fraggear</a></p>
+  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
+</section>
+
+<section id="support">
+  <h2>MÜŞTERİ HİZMETLERİ</h2>
+  <p>Her türlü soru ve destek için bize ulaşabilirsiniz.</p>
+  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
+  <a href="#" class="btn" onclick="showSection('home')">Ana Menüye Dön</a>
+</section>
+
+<section id="category-page">
+<h2 id="cat-title"></h2>
+<div class="products-list" id="cat-products"></div>
+  <a href="#" class="back-btn" onclick="showSection('products')">Ürün Kategorilerine Dön</a>
+  <a href="#" class="btn" onclick="showSection('products')">Ürün Kategorilerine Dön</a>
+</section>
+
+<footer>
 &copy; 2025 FRAGGEAR | Tüm hakları saklıdır.
 </footer>
 
@@ -433,10 +463,6 @@
 </div>
 
 <script>
-function showSection(id) {
-  document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
   // Show section
   function showSection(id) {
     document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
@@ -472,12 +498,20 @@ function showSection(id) {
     });
     showSection('category-page');
   }
+function showSection(id) {
+  document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+}
 
   // Sepete ekle efekti + alert demo
   function addToCart(item) {
     alert(`${item} sepete eklendi!`);
   }
 
+  // Satın al demo alert
+  function buyNow(item) {
+    alert(`${item} satın alma sayfasına yönlendiriliyor...`);
+  }
 function loadCategory(cat) {
   const data = {
     klavye: [
@@ -496,12 +530,13 @@ function loadCategory(cat) {
   data[cat].forEach(p => {
     const div = document.createElement('div');
     div.className = 'product';
-    div.innerHTML = `<img src="${p.img}" alt="${p.title}"><p>${p.title}</p>`;
+    div.innerHTML = `<img src="${p.img}" alt="${p.title}">
+                     <p>${p.title}</p>
+                     <a class="btn" href="#">Sepete Ekle</a>`;
     container.appendChild(div);
-  // Satın al demo alert
-  function buyNow(item) {
-    alert(`${item} satın alma sayfasına yönlendiriliyor...`);
-  }
+  });
+  showSection('category-page');
+}
 
   // Modal kontrol
   function openModal(form) {
@@ -519,6 +554,9 @@ function loadCategory(cat) {
       document.getElementById('modal-bg').classList.remove('active');
     }
   }
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('active');
+}
 
   // Basit kullanıcı kaydı ve oturum açma demo (localStorage)
   function register() {
@@ -548,10 +586,21 @@ function loadCategory(cat) {
       alert('Hoşgeldin, ' + username);
       closeModal();
       setUser(username);
-    } else {
+function showLogin() {
+  let username = prompt("Kullanıcı Adı (büyük/küçük harf duyarsız):");
+  let password = prompt("Şifre (büyük/küçük harf duyarlı):");
+  let stored = JSON.parse(localStorage.getItem('fragUser')) || {};
+  if (stored.username && stored.password) {
+    if (stored.username.toLowerCase() === username.toLowerCase() && stored.password === password) {
+      alert("Giriş başarılı!");
+} else {
       alert('Kullanıcı adı veya şifre yanlış!');
-    }
-  }
+      alert("Hatalı giriş!");
+}
+  } else {
+    alert("Önce kayıt olmalısınız.");
+}
+}
 
   // Kullanıcı oturum kontrolü
   function setUser(username) {
@@ -577,12 +626,13 @@ function loadCategory(cat) {
     if(loggedUser) {
       setUser(loggedUser);
     }
-});
-  showSection('category-page');
-}
+  });
 
-function toggleTheme() {
-  document.body.classList.toggle('light');
+function showRegister() {
+  let username = prompt("Kullanıcı Adı (büyük/küçük harf duyarsız olacak şekilde kaydedilecek):");
+  let password = prompt("Şifre (büyük/küçük harf duyarlı):");
+  localStorage.setItem('fragUser', JSON.stringify({username, password}));
+  alert("Kayıt başarılı, otomatik giriş yapıldı.");
 }
 </script>
 
