@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FragGear</title>
   <style>
-    /* RESET */
+    /* Reset */
     * {
       margin: 0; padding: 0; box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,7 +14,7 @@
       background: #121212;
       color: #eee;
       line-height: 1.6;
-      min-height: 200vh; /* Uzun sayfa için */
+      min-height: 200vh;
     }
     a {
       color: inherit;
@@ -25,7 +25,7 @@
       list-style: none;
     }
 
-    /* ÜST MENÜ */
+    /* Header */
     header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -44,7 +44,6 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.6);
     }
 
-    /* LOGO */
     .logo {
       height: 48px;
       cursor: pointer;
@@ -57,7 +56,6 @@
       display: block;
     }
 
-    /* MENÜ */
     nav {
       display: flex;
       align-items: center;
@@ -75,15 +73,15 @@
       color: #fff;
     }
 
-    /* Hakkında menüsü scrollda gizlenecek */
-    nav .about-link {
-      display: block;
-    }
+    /* Ana Menü ve Hakkında link gizleme için */
     nav.hidden .about-link {
       display: none;
     }
+    nav.hidden .home-link {
+      display: none;
+    }
 
-    /* ANA MENÜ İÇİ - KATEGORİLER */
+    /* Ana Menü - Kategoriler */
     .categories {
       max-width: 960px;
       margin: 100px auto 40px auto;
@@ -113,7 +111,7 @@
       box-shadow: 0 6px 20px rgb(230 55 0 / 0.9);
     }
 
-    /* ÜRÜNLER BÖLÜMÜ */
+    /* Ürünler Bölümü */
     .products-section {
       max-width: 960px;
       margin: 60px auto 100px auto;
@@ -168,10 +166,29 @@
       min-height: 50px;
     }
 
-    /* HAKKINDA SAYFASI */
-    /* Ayrı sayfa olarak açılacak, buraya sadece link koyduk */
+    /* Hakkında Bölümü (Başlangıçta gizli) */
+    #about-section {
+      max-width: 900px;
+      margin: 120px auto 100px auto;
+      padding: 20px;
+      background: #222;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(255 60 0, 0.6);
+      display: none;
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    #about-section h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 25px;
+      color: #ff3c00;
+      font-weight: 700;
+      letter-spacing: 1.3px;
+    }
 
-    /* İLETİŞİM BÖLÜMÜ */
+    /* Footer */
     footer {
       background: #1a1a1a;
       padding: 30px 20px;
@@ -200,8 +217,11 @@
         width: 90%;
         margin-bottom: 25px;
       }
+      #about-section {
+        margin: 100px 15px 50px 15px;
+        font-size: 16px;
+      }
     }
-
   </style>
 </head>
 <body>
@@ -211,21 +231,21 @@
       <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FragGear Logo" />
     </div>
     <nav id="mainNav">
-      <a href="#top" id="homeLink">Ana Menü</a>
-      <a href="https://example.com/hakkinda.html" target="_blank" rel="noopener" class="about-link">Hakkında</a>
+      <a href="#top" class="home-link" id="homeLink">Ana Menü</a>
+      <a href="#" class="about-link" id="aboutLink">Hakkında</a>
     </nav>
   </header>
 
   <main>
-    <!-- Ana Menü Başlangıç - Kategoriler orta kısımda -->
+    <!-- Ana Menü - Kategoriler -->
     <section class="categories" id="top">
       <div class="category-btn" data-target="keyboard-section">Klavye</div>
       <div class="category-btn" data-target="mouse-section">Mouse</div>
       <div class="category-btn" data-target="mousepad-section">Mousepad</div>
     </section>
 
-    <!-- Ürünler bölümü (sayfanın aşağısında, başlangıçta görünmez değil ama uzak) -->
-    <section class="products-section">
+    <!-- Ürünler -->
+    <section class="products-section" id="products-section">
 
       <h2 id="keyboard-section">Klavye Ürünleri</h2>
       <div class="product-list">
@@ -255,6 +275,24 @@
       </div>
 
     </section>
+
+    <!-- Hakkında -->
+    <section id="about-section">
+      <h2>Hakkında</h2>
+      <p>
+        FragGear, espor oyuncuları için yüksek kaliteli ve performanslı ürünler sunan bir markadır.
+        Amacımız, oyuncuların en iyi ekipmanlarla oyun deneyimlerini zirveye taşımaktır.
+      </p>
+      <p>
+        Kurucumuz Tahacan Oktar, uzun yıllardır Valorant Immortal seviyesinde rekabet eden,
+        espor ve oyun dünyasına tutkuyla bağlı bir oyuncudur. Tasarım ve performansı bir araya getirerek
+        oyunculara en iyisini sunmayı hedefliyoruz.
+      </p>
+      <p>
+        Bizimle iletişime geçmek isterseniz sayfanın en altındaki iletişim bilgilerini kullanabilirsiniz.
+      </p>
+    </section>
+
   </main>
 
   <footer>
@@ -265,36 +303,51 @@
   </footer>
 
   <script>
-    // Scroll ile header arka plan koyulaştırma
     const header = document.getElementById('header');
     const nav = document.getElementById('mainNav');
-    const aboutLink = nav.querySelector('.about-link');
     const logo = document.getElementById('logo');
+    const homeLink = document.getElementById('homeLink');
+    const aboutLink = document.getElementById('aboutLink');
+    const categories = document.querySelector('.categories');
+    const productsSection = document.getElementById('products-section');
+    const aboutSection = document.getElementById('about-section');
 
+    // Başlangıçta Hakkında gizli, ürünler ve kategoriler görünür
+    aboutSection.style.display = 'none';
+
+    // Scroll ile header arka plan koyulaştırma
     window.addEventListener('scroll', () => {
       if(window.scrollY > 30) {
         header.classList.add('scrolled');
-        nav.classList.add('hidden'); // Hakkında gizle
+        nav.classList.add('hidden'); // Hakkında link gizlenir scrollda
       } else {
         header.classList.remove('scrolled');
         nav.classList.remove('hidden');
       }
     });
 
-    // Logo tıklayınca en üst bölüme git
+    // Logo tıklayınca ana menüye scroll
     logo.addEventListener('click', () => {
+      showHome();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Menüdeki ana menü linki de scroll en üste
-    document.getElementById('homeLink').addEventListener('click', e => {
+    // Ana Menü link tıklama
+    homeLink.addEventListener('click', e => {
       e.preventDefault();
+      showHome();
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Hakkında link tıklama - tek sayfa gösterimi
+    aboutLink.addEventListener('click', e => {
+      e.preventDefault();
+      showAbout();
+      window.scrollTo({ top: 80, behavior: 'smooth' });
     });
 
     // Kategori butonları scrolla yönlendirme
-    const categoryButtons = document.querySelectorAll('.category-btn');
-    categoryButtons.forEach(btn => {
+    document.querySelectorAll('.category-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const targetId = btn.getAttribute('data-target');
         const targetElem = document.getElementById(targetId);
@@ -303,6 +356,29 @@
         }
       });
     });
+
+    // Fonksiyonlar
+    function showHome() {
+      categories.style.display = 'flex';
+      productsSection.style.display = 'block';
+      aboutSection.style.display = 'none';
+
+      // Menüde link gösterimi
+      nav.classList.remove('hidden');
+      homeLink.style.display = 'inline-block';
+      aboutLink.style.display = 'inline-block';
+    }
+
+    function showAbout() {
+      categories.style.display = 'none';
+      productsSection.style.display = 'none';
+      aboutSection.style.display = 'block';
+
+      // Menüde sadece Ana Menü linki göster
+      nav.classList.remove('hidden');
+      homeLink.style.display = 'inline-block';
+      aboutLink.style.display = 'inline-block';
+    }
   </script>
 
 </body>
