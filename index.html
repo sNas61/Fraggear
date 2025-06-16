@@ -7,191 +7,144 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background: #0a0a0a;
-      color: #f0f0f0;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+      font-family: sans-serif;
+      background: #e6f7ff;
+      color: #000;
     }
     header {
       position: fixed;
-      top: 0;
       width: 100%;
-      background: rgba(0,0,0,0.9);
+      background: #00bcd4;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 30px;
-      box-sizing: border-box;
+      padding: 10px 20px;
       z-index: 1000;
     }
     header img {
-      height: 60px;
+      height: 40px;
     }
     nav {
       display: flex;
-      align-items: center;
-      gap: 30px;
+      gap: 20px;
     }
     nav a {
-      color: #00cfcf;
+      color: #fff;
       text-decoration: none;
-      font-size: 1.1em;
       font-weight: bold;
+      transition: 0.3s;
     }
     nav a:hover {
-      color: #00ffff;
+      opacity: 0.7;
     }
-    #home, #products, #about, #contact {
-      display: none;
-      padding: 100px 30px 60px;
-      max-width: 1200px;
-      margin: auto;
+    .hero {
+      padding-top: 80px;
       text-align: center;
+      padding-bottom: 40px;
     }
-    #home.active, #products.active, #about.active, #contact.active {
-      display: block;
+    .hero h1 {
+      font-size: 2em;
     }
-    h1 {
-      font-size: 4em;
-      margin-bottom: 10px;
-    }
-    .slogan {
-      font-size: 1.7em;
-      color: #00cfcf;
-    }
-    .products-list {
-      display: flex;
+    .products, .product-list {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: none;
       flex-wrap: wrap;
-      gap: 30px;
       justify-content: center;
-      margin-top: 40px;
+      gap: 20px;
+      padding: 40px 0;
     }
     .product {
-      background: rgba(17, 17, 17, 0.85);
+      width: 200px;
+      border: 1px solid #ccc;
       padding: 10px;
-      border-radius: 10px;
-      width: 220px;
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-    .product:hover {
-      transform: scale(1.05);
+      background: #fff;
     }
     .product img {
       width: 100%;
-      border-radius: 8px;
     }
-    footer {
-      background: #111;
-      color: #888;
-      padding: 20px;
-      font-size: 0.9em;
-      margin-top: 50px;
+    .back-button {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #00bcd4;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
     }
-    .back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #00cfcf;
-      color: #000;
-      border-radius: 6px;
-      text-decoration: none;
+    .back-button span {
+      display: none;
     }
   </style>
 </head>
 <body>
 
 <header>
+  <div>
+    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo"/>
+  </div>
   <nav>
-    <a href="#" onclick="showSection('products')">ÜRÜNLER</a>
-    <a href="#" onclick="showSection('about')">HAKKINDA</a>
-  </nav>
-  <a href="#" onclick="showSection('home')">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo">
-  </a>
-  <nav>
-    <a href="#" onclick="showSection('contact')">İLETİŞİM</a>
-    <a href="https://instagram.com/" target="_blank">INSTAGRAM</a>
+    <a href="#" onclick="goToSection('mouse')">Mouse</a>
+    <a href="#" onclick="goToSection('keyboard')">Klavye</a>
+    <a href="#" onclick="goToSection('mousepad')">Mousepad</a>
+    <a href="#" onclick="alert('Müşteri Hizmetleri: 0535 049 5006')">Müşteri Hizmetleri</a>
   </nav>
 </header>
 
-<section id="home" class="active">
+<div class="hero">
   <h1>FRAGGEAR</h1>
-  <p class="slogan">DESIGNED FOR CHAMPIONS</p>
-</section>
+  <p>DESIGNED FOR CHAMPIONS</p>
+</div>
 
-<section id="products">
-  <h2>ÜRÜN KATEGORİLERİ</h2>
-  <div class="products-list">
-    <div class="product" onclick="loadCategory('klavye')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye">
-      <p>Klavye</p>
-    </div>
-    <div class="product" onclick="loadCategory('mouse')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse">
-      <p>Mouse</p>
-    </div>
-    <div class="product" onclick="loadCategory('mousepad')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad">
-      <p>Mousepad</p>
-    </div>
+<div id="mouse" class="product-list">
+  <div class="product">
+    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse">
+    <p>Mouse Ürün 1</p>
   </div>
-</section>
+</div>
 
-<section id="about">
-  <h2>HAKKINDA</h2>
-  <p>FRAGGEAR esporcular için premium donanım sunar. Kalite ve performans odağındayız.</p>
-  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
-</section>
+<div id="keyboard" class="product-list">
+  <div class="product">
+    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye">
+    <p>Klavye Ürün 1</p>
+  </div>
+</div>
 
-<section id="contact">
-  <h2>İLETİŞİM</h2>
-  <p>Telefon: 0535 049 5006</p>
-  <p>Email: tahacanoktar11@gmail.com</p>
-  <p>Instagram: <a href="https://instagram.com/" target="_blank" style="color:#00cfcf;">@fraggear</a></p>
-  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
-</section>
+<div id="mousepad" class="product-list">
+  <div class="product">
+    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad">
+    <p>Mousepad Ürün 1</p>
+  </div>
+</div>
 
-<section id="category-page">
-  <h2 id="cat-title"></h2>
-  <div class="products-list" id="cat-products"></div>
-  <a href="#" class="back-btn" onclick="showSection('products')">Ürün Kategorilerine Dön</a>
-</section>
-
-<footer>
-  &copy; 2025 FRAGGEAR | Tüm hakları saklıdır.
-</footer>
+<button class="back-button" onclick="goHome()">↑</button>
 
 <script>
-function showSection(id) {
-  document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+  function goToSection(sectionId) {
+    document.querySelectorAll('.product-list').forEach(list => {
+      list.style.display = 'none';
+    });
+    document.getElementById(sectionId).style.display = 'flex';
+    document.querySelector('.hero').style.display = 'none';
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
 
-function loadCategory(cat) {
-  const data = {
-    klavye: [
-      {title: 'Gaming Klavye', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png'}
-    ],
-    mouse: [
-      {title: 'Gaming Mouse', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp'}
-    ],
-    mousepad: [
-      {title: 'Gaming Mousepad', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg'}
-    ]
-  };
-  document.getElementById('cat-title').innerText = cat.toUpperCase();
-  const container = document.getElementById('cat-products');
-  container.innerHTML = '';
-  data[cat].forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'product';
-    div.innerHTML = `<img src="${p.img}" alt="${p.title}"><p>${p.title}</p>`;
-    container.appendChild(div);
-  });
-  showSection('category-page');
-}
+  function goHome() {
+    document.querySelectorAll('.product-list').forEach(list => {
+      list.style.display = 'none';
+    });
+    document.querySelector('.hero').style.display = 'block';
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
 </script>
 
 </body>
