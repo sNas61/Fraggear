@@ -5,11 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FRAGGEAR</title>
   <style>
+    :root {
+      --bg: #0a0a0a;
+      --text: #f0f0f0;
+      --accent: #00cfcf;
+      --footer: #111;
+    }
+    body.light {
+      --bg: #f0f0f0;
+      --text: #0a0a0a;
+      --accent: #007777;
+      --footer: #ddd;
+    }
     body {
       margin: 0;
       font-family: 'Helvetica Neue', sans-serif;
-      background: #0a0a0a;
-      color: #f0f0f0;
+      background: var(--bg);
+      color: var(--text);
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
@@ -34,7 +46,7 @@
       gap: 30px;
     }
     nav a {
-      color: #00cfcf;
+      color: var(--accent);
       text-decoration: none;
       font-size: 1.1em;
       font-weight: bold;
@@ -64,7 +76,7 @@
     }
     .slogan {
       font-size: 1.7em;
-      color: #00cfcf;
+      color: var(--accent);
     }
     .products-list {
       display: flex;
@@ -83,46 +95,62 @@
     }
     .product:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 15px #00cfcf;
+      box-shadow: 0 0 15px var(--accent);
     }
     .product img {
       width: 100%;
       border-radius: 8px;
     }
     footer {
-      background: #111;
+      background: var(--footer);
       color: #888;
       padding: 20px;
       font-size: 0.9em;
-      margin-top: 50px;
+      text-align: center;
+      position: relative;
+      bottom: 0;
+      width: 100%;
     }
     .back-btn {
       display: inline-block;
       margin-top: 20px;
       padding: 10px 20px;
-      background: #00cfcf;
-      color: #000;
+      background: var(--accent);
+      color: var(--bg);
       border-radius: 6px;
       text-decoration: none;
+      position: relative;
+      overflow: hidden;
     }
-    .scroll-btn {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: #00cfcf;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #000;
-      font-size: 1.5em;
+    .back-btn::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, var(--accent) 10%, transparent 10.01%);
+      background-size: 10% 10%;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .back-btn:hover::after {
+      opacity: 0.4;
+      animation: neon 1s infinite linear;
+    }
+    @keyframes neon {
+      0% { background-position: 0 0; }
+      100% { background-position: 100% 100%; }
+    }
+    .theme-toggle {
       cursor: pointer;
-      transition: background 0.3s;
+      font-size: 1.5em;
+      margin-left: 20px;
+      color: var(--accent);
+      transition: color 0.3s;
     }
-    .scroll-btn:hover {
-      background: #00ffff;
+    .theme-toggle:hover {
+      color: #00ffff;
     }
   </style>
 </head>
@@ -139,6 +167,7 @@
   <nav>
     <a href="#" onclick="showSection('contact')">İLETİŞİM</a>
     <a href="#" onclick="showSection('support')">MÜŞTERİ HİZMETLERİ</a>
+    <span class="theme-toggle" onclick="toggleTheme()">🌙</span>
   </nav>
 </header>
 
@@ -175,7 +204,7 @@
   <h2>İLETİŞİM</h2>
   <p>Telefon: 0535 049 5006</p>
   <p>Email: tahacanoktar11@gmail.com</p>
-  <p>Instagram: <a href="https://instagram.com/" target="_blank" style="color:#00cfcf;">@fraggear</a></p>
+  <p>Instagram: <a href="https://instagram.com/" target="_blank" style="color:var(--accent);">@fraggear</a></p>
   <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
 </section>
 
@@ -190,8 +219,6 @@
   <div class="products-list" id="cat-products"></div>
   <a href="#" class="back-btn" onclick="showSection('products')">Ürün Kategorilerine Dön</a>
 </section>
-
-<div class="scroll-btn" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑</div>
 
 <footer>
   &copy; 2025 FRAGGEAR | Tüm hakları saklıdır.
@@ -225,6 +252,10 @@ function loadCategory(cat) {
     container.appendChild(div);
   });
   showSection('category-page');
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('light');
 }
 </script>
 
