@@ -2,19 +2,24 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>FRAGGEAR</title>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    /* --- Reset ve temel --- */
     body {
       margin: 0;
       font-family: 'Helvetica Neue', sans-serif;
       background: #0a0a0a;
       color: #f0f0f0;
       overflow-x: hidden;
+      scroll-behavior: smooth;
+      transition: background 0.3s, color 0.3s;
     }
+    h1,h2,p {
+      margin: 0 0 10px 0;
+    }
+
+    /* --- Header ve Navbar --- */
     header {
       position: fixed;
       top: 0;
@@ -25,12 +30,10 @@
       justify-content: space-between;
       padding: 10px 30px;
       box-sizing: border-box;
-      z-index: 1000;
+      z-index: 1100;
+      user-select: none;
     }
-    header img {
-      height: 60px;
-    }
-    nav {
+    header nav.left, header nav.right {
       display: flex;
       align-items: center;
       gap: 30px;
@@ -40,25 +43,107 @@
       text-decoration: none;
       font-size: 1.1em;
       font-weight: bold;
-      transition: color 0.3s ease;
+      cursor: pointer;
+      transition: color 0.3s;
     }
     nav a:hover {
       color: #00ffff;
     }
-    #home, #products, #about, #contact, #category-page {
+    header img.logo {
+      height: 60px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.3s;
+    }
+    header img.logo:hover {
+      transform: scale(1.05);
+    }
+
+    /* Hamburger Butonu */
+    #hamburger-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 28px;
+      height: 22px;
+      cursor: pointer;
+      z-index: 1201;
+    }
+    #hamburger-btn div {
+      width: 100%;
+      height: 3px;
+      background: #00cfcf;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Hamburger Menü */
+    #hamburger-menu {
+      position: fixed;
+      top: 0;
+      right: -260px;
+      width: 260px;
+      height: 100vh;
+      background: #121212;
+      box-shadow: -4px 0 8px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      padding: 80px 20px 20px;
+      box-sizing: border-box;
+      gap: 20px;
+      transition: right 0.4s ease;
+      z-index: 1200;
+    }
+    #hamburger-menu.active {
+      right: 0;
+    }
+    #hamburger-menu a {
+      font-size: 1.2em;
+      color: #00cfcf;
+      user-select: none;
+      padding: 10px;
+      border-radius: 6px;
+      transition: background 0.3s, color 0.3s;
+    }
+    #hamburger-menu a:hover {
+      background: #00cfcf;
+      color: #000;
+    }
+
+    /* Overlay (menü açıkken kalan kısmı kapatmak için) */
+    #overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+      z-index: 1150;
+    }
+    #overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Bölümler */
+    section {
       display: none;
       padding: 100px 30px 60px;
       max-width: 1200px;
-      margin: auto;
+      margin: 0 auto 40px auto;
       text-align: center;
-      opacity: 0;
+      box-sizing: border-box;
       transition: opacity 0.5s ease;
     }
     section.active {
       display: block;
       opacity: 1;
     }
-    h1 {
+
+    /* Ana Sayfa */
+    #home h1 {
       font-size: 4em;
       margin-bottom: 10px;
     }
@@ -66,117 +151,227 @@
       font-size: 1.7em;
       color: #00cfcf;
     }
+
+    /* Ürün Kategorileri */
     .products-list {
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
       justify-content: center;
       margin-top: 40px;
+      transition: all 0.4s ease;
     }
     .product {
       background: rgba(17, 17, 17, 0.85);
       padding: 10px;
       border-radius: 10px;
       width: 220px;
-      transition: transform 0.3s ease;
       cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+      position: relative;
     }
     .product:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 10px #00cfcf;
     }
     .product img {
       width: 100%;
       border-radius: 8px;
+      user-select: none;
+    }
+
+    /* Ürün butonları */
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
     }
     .btn {
+      background: #00cfcf;
+      border: none;
+      padding: 8px 16px;
+      font-weight: bold;
+      color: #000;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn:hover {
+      background: #00ffff;
+      color: #000;
+      box-shadow: 0 0 15px #00ffff;
+    }
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Back Buttons Efekti */
+    .back-btn {
       display: inline-block;
-      margin: 10px;
+      margin-top: 20px;
       padding: 10px 20px;
       background: #00cfcf;
       color: #000;
       border-radius: 6px;
       text-decoration: none;
-      position: relative;
-      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 0 5px #00cfcf;
+      transition: box-shadow 0.3s ease, color 0.3s ease, background 0.3s ease;
     }
-    .btn::after {
-      content: "";
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,255,255,0.2);
-      transition: left 0.4s ease;
+    .back-btn:hover {
+      box-shadow: 0 0 15px #00ffff;
+      color: #000;
+      background: #00ffff;
     }
-    .btn:hover::after {
-      left: 0;
-    }
+
+    /* Footer */
     footer {
       background: #111;
       color: #888;
       padding: 20px;
       font-size: 0.9em;
+      margin-top: 50px;
       text-align: center;
-      position: relative;
+      user-select: none;
     }
-    .hamburger {
-      display: block;
+
+    /* Dark Mode Styles */
+    body.dark {
+      background: #f0f0f0;
+      color: #0a0a0a;
+    }
+    body.dark header {
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 0 15px rgba(0,255,255,0.3);
+    }
+    body.dark nav a, body.dark #hamburger-menu a {
+      color: #007777;
+    }
+    body.dark nav a:hover, body.dark #hamburger-menu a:hover {
+      color: #00cccc;
+    }
+    body.dark .product {
+      background: rgba(230,230,230,0.9);
+      color: #111;
+    }
+    body.dark .product:hover {
+      box-shadow: 0 0 10px #009999;
+    }
+    body.dark .btn {
+      background: #009999;
+      color: #f0f0f0;
+    }
+    body.dark .btn:hover {
+      background: #00cccc;
+      box-shadow: 0 0 15px #00cccc;
+      color: #fff;
+    }
+    body.dark .back-btn {
+      background: #009999;
+      color: #f0f0f0;
+      box-shadow: 0 0 5px #009999;
+    }
+    body.dark .back-btn:hover {
+      background: #00cccc;
+      box-shadow: 0 0 15px #00cccc;
+      color: #fff;
+    }
+
+    /* Dark mode toggle switch */
+    .toggle-switch {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+      font-weight: bold;
+      color: #00cfcf;
       cursor: pointer;
     }
-    .hamburger div {
-      width: 25px;
-      height: 3px;
+    .toggle-switch input[type="checkbox"] {
+      appearance: none;
+      width: 40px;
+      height: 20px;
       background: #00cfcf;
-      margin: 5px;
+      border-radius: 20px;
+      position: relative;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .toggle-switch input[type="checkbox"]:checked {
+      background: #00ffff;
+    }
+    .toggle-switch input[type="checkbox"]::before {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      top: 1px;
+      left: 1px;
+      background: #000;
       transition: 0.3s;
     }
-    .sidebar {
-      position: fixed;
-      top: 0;
-      right: -250px;
-      width: 250px;
-      height: 100%;
-      background: rgba(0,0,0,0.95);
-      padding: 20px;
-      box-sizing: border-box;
-      transition: right 0.3s ease;
-      z-index: 999;
+    .toggle-switch input[type="checkbox"]:checked::before {
+      left: 21px;
+      background: #000;
     }
-    .sidebar.active {
-      right: 0;
-    }
-    .sidebar a {
-      display: block;
-      margin: 15px 0;
-      color: #00cfcf;
-      text-decoration: none;
-      font-weight: bold;
+
+    /* Responsive & Hamburger Show */
+    @media screen and (max-width: 960px) {
+      header nav.left, header nav.right {
+        display: none;
+      }
+      #hamburger-btn {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <nav>
+  <nav class="left">
     <a href="#" onclick="showSection('products')">ÜRÜNLER</a>
     <a href="#" onclick="showSection('about')">HAKKIMIZDA</a>
     <a href="#" onclick="showSection('contact')">İLETİŞİM</a>
-    <a href="#" onclick="alert('Müşteri Hizmetleri: 0535 049 5006')">MÜŞTERİ HİZMETLERİ</a>
+    <a href="#" onclick="showSection('customer-service')">MÜŞTERİ HİZMETLERİ</a>
   </nav>
+
   <a href="#" onclick="showSection('home')">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo">
+    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo" class="logo" />
   </a>
-  <div class="hamburger" onclick="toggleSidebar()">
+
+  <nav class="right">
+    <!-- Boş, simetri için -->
+  </nav>
+
+  <div id="hamburger-btn" onclick="toggleHamburger()">
     <div></div><div></div><div></div>
   </div>
 </header>
 
-<div class="sidebar" id="sidebar">
-  <a href="#" onclick="authAction('login')">GİRİŞ YAP</a>
-  <a href="#" onclick="authAction('register')">KAYIT OL</a>
-  <a href="#" id="profile-link" style="display:none" onclick="alert('Profil Sayfası')">PROFİLİ GÖR</a>
-  <a href="#" id="logout-link" style="display:none" onclick="logout()">ÇIKIŞ YAP</a>
+<div id="hamburger-menu" aria-hidden="true">
+  <a href="#" onclick="showSection('products'); toggleHamburger()">ÜRÜNLER</a>
+  <a href="#" onclick="showSection('about'); toggleHamburger()">HAKKIMIZDA</a>
+  <a href="#" onclick="showSection('contact'); toggleHamburger()">İLETİŞİM</a>
+  <a href="#" onclick="showSection('customer-service'); toggleHamburger()">MÜŞTERİ HİZMETLERİ</a>
+
+  <!-- Dark mode toggle -->
+  <label class="toggle-switch" for="darkModeToggle">
+    Dark Mode
+    <input type="checkbox" id="darkModeToggle" />
+  </label>
 </div>
+
+<div id="overlay" onclick="toggleHamburger()"></div>
 
 <section id="home" class="active">
   <h1>FRAGGEAR</h1>
@@ -187,15 +382,15 @@
   <h2>ÜRÜN KATEGORİLERİ</h2>
   <div class="products-list">
     <div class="product" onclick="loadCategory('klavye')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye">
+      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye" />
       <p>Klavye</p>
     </div>
     <div class="product" onclick="loadCategory('mouse')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse">
+      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse" />
       <p>Mouse</p>
     </div>
     <div class="product" onclick="loadCategory('mousepad')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad">
+      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad" />
       <p>Mousepad</p>
     </div>
   </div>
@@ -204,7 +399,7 @@
 <section id="about">
   <h2>HAKKIMIZDA</h2>
   <p>FRAGGEAR esporcular için premium donanım sunar. Kalite ve performans odağındayız.</p>
-  <a href="#" class="btn" onclick="showSection('home')">ANA MENÜYE DÖN</a>
+  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
 </section>
 
 <section id="contact">
@@ -212,67 +407,107 @@
   <p>Telefon: 0535 049 5006</p>
   <p>Email: tahacanoktar11@gmail.com</p>
   <p>Instagram: <a href="https://instagram.com/" target="_blank" style="color:#00cfcf;">@fraggear</a></p>
-  <a href="#" class="btn" onclick="showSection('home')">ANA MENÜYE DÖN</a>
+  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
+</section>
+
+<section id="customer-service">
+  <h2>MÜŞTERİ HİZMETLERİ</h2>
+  <p>Her türlü destek ve sorunlarınız için bize ulaşabilirsiniz.</p>
+  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
 </section>
 
 <section id="category-page">
   <h2 id="cat-title"></h2>
   <div class="products-list" id="cat-products"></div>
-  <a href="#" class="btn" onclick="showSection('products')">ÜRÜN KATEGORİLERİNE DÖN</a>
+  <a href="#" class="back-btn" onclick="showSection('products')">Ürün Kategorilerine Dön</a>
 </section>
 
-<footer id="footer">
+<footer>
   &copy; 2025 FRAGGEAR | Tüm hakları saklıdır.
 </footer>
 
 <script>
-let loggedIn = false;
-function showSection(id) {
-  document.querySelectorAll('section').forEach(sec => {
-    sec.classList.remove('active');
-    sec.style.opacity = 0;
-  });
-  const target = document.getElementById(id);
-  target.classList.add('active');
-  setTimeout(() => { target.style.opacity = 1; }, 50);
-}
-function loadCategory(cat) {
-  const data = {
-    klavye: [{title:'Gaming Klavye', img:'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png'}],
-    mouse: [{title:'Gaming Mouse', img:'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp'}],
-    mousepad: [{title:'Gaming Mousepad', img:'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg'}]
-  };
-  document.getElementById('cat-title').innerText = cat.toUpperCase();
-  const container = document.getElementById('cat-products');
-  container.innerHTML = '';
-  data[cat].forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'product';
-    div.innerHTML = `<img src="${p.img}" alt="${p.title}"><p>${p.title}</p>
-    <a href="#" class="btn">SEPETE EKLE</a>
-    <a href="#" class="btn">SATIN AL</a>`;
-    container.appendChild(div);
-  });
-  showSection('category-page');
-}
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('active');
-}
-function authAction(action) {
-  if(action === 'login' || action === 'register'){
-    loggedIn = true;
-    document.getElementById('profile-link').style.display = 'block';
-    document.getElementById('logout-link').style.display = 'block';
+  // Bölüm gösterme fonksiyonu
+  function showSection(id) {
+    document.querySelectorAll('section').forEach(sec => {
+      if(sec.id === id) {
+        sec.classList.add('active');
+      } else {
+        sec.classList.remove('active');
+      }
+    });
+    // Eğer hamburger açıksa kapat
+    if(document.getElementById('hamburger-menu').classList.contains('active')){
+      toggleHamburger();
+    }
   }
-}
-function logout() {
-  loggedIn = false;
-  document.getElementById('profile-link').style.display = 'none';
-  document.getElementById('logout-link').style.display = 'none';
-}
-window.onload = () => {
-  document.body.style.zoom = "100%";
-}
+
+  // Kategori verileri ve ürün gösterme
+  const data = {
+    klavye: [
+      {title: 'Gaming Klavye', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png'}
+    ],
+    mouse: [
+      {title: 'Gaming Mouse', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp'}
+    ],
+    mousepad: [
+      {title: 'Gaming Mousepad', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg'}
+    ]
+  };
+  function loadCategory(cat) {
+    document.getElementById('cat-title').innerText = cat.toUpperCase();
+    const container = document.getElementById('cat-products');
+    container.innerHTML = '';
+    data[cat].forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'product';
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.title}">
+        <p>${p.title}</p>
+        <div class="btn-group">
+          <button class="btn" onclick="addToCart('${p.title}')">Sepete Ekle</button>
+          <button class="btn" onclick="buyNow('${p.title}')">Satın Al</button>
+        </div>
+      `;
+      container.appendChild(div);
+    });
+    showSection('category-page');
+  }
+
+  // Sepete ekle butonu örneği
+  function addToCart(product) {
+    alert(product + " sepete eklendi!");
+  }
+  // Satın al butonu örneği
+  function buyNow(product) {
+    alert(product + " satın alındı!");
+  }
+
+  // Hamburger menü aç/kapa
+  function toggleHamburger() {
+    const menu = document.getElementById('hamburger-menu');
+    const overlay = document.getElementById('overlay');
+    if(menu.classList.contains('active')){
+      menu.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    } else {
+      menu.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  // Dark Mode Toggle
+  const darkToggle = document.getElementById('darkModeToggle');
+  darkToggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark', darkToggle.checked);
+  });
+
+  // Sayfa açılırken ekran ölçek sorunu için zoom ayarı kaldırıldı, viewport meta tagında zaten kontrol var
+
+  // Hamburger dışına tıklayınca kapanma handled by #overlay click handler
+
 </script>
 
 </body>
