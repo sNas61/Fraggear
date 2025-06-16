@@ -1,185 +1,309 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FragGear | Built for Champions</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FragGear</title>
   <style>
+    /* RESET */
     * {
       margin: 0; padding: 0; box-sizing: border-box;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-
     body {
-      background: #0a0f25 url('https://images.unsplash.com/photo-1606813902934-6c2b01a2d506?fit=crop&w=1950&q=80') no-repeat center center / cover;
+      background: #121212;
       color: #eee;
+      line-height: 1.6;
+      min-height: 200vh; /* Uzun sayfa için */
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    ul {
+      list-style: none;
     }
 
+    /* ÜST MENÜ */
     header {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 1rem 2rem;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 60px;
+      background: rgba(18,18,18,0.95);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      padding: 0 20px;
+      z-index: 9999;
+      border-bottom: 1px solid #333;
+      transition: background 0.3s ease;
+    }
+    header.scrolled {
+      background: rgba(18,18,18,1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
     }
 
-    header img {
-      height: 60px;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    nav a {
-      color: #00ffff;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #ff00ff;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 5rem 1rem;
-      background: rgba(0, 0, 0, 0.5);
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      color: #ccc;
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-      background: rgba(0,0,0,0.6);
-      margin: 2rem;
-      border-radius: 10px;
-    }
-
-    .product-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 1rem;
-      border-radius: 8px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px #00ffff;
-    }
-
-    .product-card img {
-      width: 100%;
-      border-radius: 5px;
-      margin-bottom: 1rem;
-    }
-
-    .product-card h3 {
-      color: #00ffff;
-      margin-bottom: 0.5rem;
-    }
-
-    .product-card p {
-      color: #aaa;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .product-card .price {
-      color: #0f0;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-
-    .product-card button {
-      background: #00ffff;
-      color: #000;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
+    /* LOGO */
+    .logo {
+      height: 48px;
       cursor: pointer;
-      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 48px;
+      width: auto;
+      display: block;
     }
 
-    .product-card button:hover {
-      background: #ff00ff;
+    /* MENÜ */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-weight: 600;
+      font-size: 17px;
+    }
+    nav a {
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+    }
+    nav a:hover {
+      background: #ff3c00;
+      color: #fff;
     }
 
-    footer {
+    /* Hakkında menüsü scrollda gizlenecek */
+    nav .about-link {
+      display: block;
+    }
+    nav.hidden .about-link {
+      display: none;
+    }
+
+    /* ANA MENÜ İÇİ - KATEGORİLER */
+    .categories {
+      max-width: 960px;
+      margin: 100px auto 40px auto;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      z-index: 10;
+      position: relative;
+    }
+    .category-btn {
+      background: #ff3c00;
+      color: #fff;
+      font-size: 28px;
+      padding: 25px 40px;
+      border-radius: 14px;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgb(255 60 0 / 0.7);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s ease;
       text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      background: rgba(0,0,0,0.7);
-      margin-top: 2rem;
+      min-width: 200px;
     }
+    .category-btn:hover {
+      background: #e63700;
+      box-shadow: 0 6px 20px rgb(230 55 0 / 0.9);
+    }
+
+    /* ÜRÜNLER BÖLÜMÜ */
+    .products-section {
+      max-width: 960px;
+      margin: 60px auto 100px auto;
+      padding: 0 10px;
+    }
+    .products-section h2 {
+      text-align: center;
+      font-size: 34px;
+      margin-bottom: 25px;
+      color: #ff3c00;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+    .product-list {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .product {
+      background: #222;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.7);
+      width: 260px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .product:hover {
+      transform: scale(1.06);
+      box-shadow: 0 6px 30px rgb(255 60 0 / 0.8);
+    }
+    .product img {
+      width: 100%;
+      height: 160px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      background: #111;
+      padding: 10px;
+    }
+    .product h3 {
+      font-size: 22px;
+      color: #ff3c00;
+      margin-bottom: 8px;
+    }
+    .product p {
+      color: #ccc;
+      font-size: 15px;
+      min-height: 50px;
+    }
+
+    /* HAKKINDA SAYFASI */
+    /* Ayrı sayfa olarak açılacak, buraya sadece link koyduk */
+
+    /* İLETİŞİM BÖLÜMÜ */
+    footer {
+      background: #1a1a1a;
+      padding: 30px 20px;
+      color: #bbb;
+      text-align: center;
+      font-size: 16px;
+      border-top: 1px solid #333;
+      user-select: none;
+    }
+    footer a {
+      color: #ff3c00;
+      font-weight: 700;
+    }
+    footer p {
+      margin-bottom: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      .category-btn {
+        font-size: 22px;
+        padding: 18px 30px;
+        min-width: 150px;
+      }
+      .product {
+        width: 90%;
+        margin-bottom: 25px;
+      }
+    }
+
   </style>
 </head>
 <body>
 
-<header>
-  <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FragGear Logo"> <!-- Buraya logo görselinin URL'sini koy -->
-  <nav>
-    <ul>
-      <li><a href="#products">Ürünler</a></li>
-      <li><a href="#about">Hakkımızda</a></li>
-      <li><a href="#contact">İletişim</a></li>
-    </ul>
-  </nav>
-</header>
+  <header id="header">
+    <div class="logo" id="logo">
+      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FragGear Logo" />
+    </div>
+    <nav id="mainNav">
+      <a href="#top" id="homeLink">Ana Menü</a>
+      <a href="https://example.com/hakkinda.html" target="_blank" rel="noopener" class="about-link">Hakkında</a>
+    </nav>
+  </header>
 
-<section class="hero">
-  <h1>Built for Champions</h1>
-  <p>Profesyonel e-sporcular için premium ekipman</p>
-</section>
+  <main>
+    <!-- Ana Menü Başlangıç - Kategoriler orta kısımda -->
+    <section class="categories" id="top">
+      <div class="category-btn" data-target="keyboard-section">Klavye</div>
+      <div class="category-btn" data-target="mouse-section">Mouse</div>
+      <div class="category-btn" data-target="mousepad-section">Mousepad</div>
+    </section>
 
-<section class="products" id="products">
+    <!-- Ürünler bölümü (sayfanın aşağısında, başlangıçta görünmez değil ama uzak) -->
+    <section class="products-section">
 
-  <div class="product-card">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Ürün 4">
-    <h3>FragGear Klavye</h3>
-    <p>RGB mekanik, hızlı tepki</p>
-    <div class="price">₺1.299</div>
-    <button>Sepete Ekle</button>
-  </div>
+      <h2 id="keyboard-section">Klavye Ürünleri</h2>
+      <div class="product-list">
+        <div class="product">
+          <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye" />
+          <h3>FragGear Klavye</h3>
+          <p>Yüksek performanslı mekanik klavye.</p>
+        </div>
+      </div>
 
-  <div class="product-card">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse">
-    <h3>FragGear Mouse</h3>
-    <p>16K DPI, ultra hafif</p>
-    <div class="price">₺899</div>
-    <button>Sepete Ekle</button>
-  </div>
+      <h2 id="mouse-section">Mouse Ürünleri</h2>
+      <div class="product-list">
+        <div class="product">
+          <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse" />
+          <h3>FragGear Mouse</h3>
+          <p>Hassas ve hızlı tepki veren oyun faresi.</p>
+        </div>
+      </div>
 
-  <div class="product-card">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Ürün 3">
-    <h3>FragGear Mousepad</h3>
-    <p>Kaymaz taban, geniş yüzey</p>
-    <div class="price">₺600</div>
-    <button>Sepete Ekle</button>
-  </div>
+      <h2 id="mousepad-section">Mousepad Ürünleri</h2>
+      <div class="product-list">
+        <div class="product">
+          <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad" />
+          <h3>FragGear Mousepad</h3>
+          <p>Büyük yüzey, kaymaz taban ile oyunlarda üstün kontrol.</p>
+        </div>
+      </div>
 
-</section>
+    </section>
+  </main>
 
-<footer>
-  &copy; 2025 FragGear. Tüm hakları saklıdır.
-</footer>
+  <footer>
+    <p>İletişim:</p>
+    <p>Telefon: <a href="tel:+905350495006">0535 049 5006</a></p>
+    <p>E-posta: <a href="mailto:tahacanoktar11@gmail.com">tahacanoktar11@gmail.com</a></p>
+    <p>Instagram: <a href="https://www.instagram.com/fraggear" target="_blank" rel="noopener">@fraggear</a></p>
+  </footer>
+
+  <script>
+    // Scroll ile header arka plan koyulaştırma
+    const header = document.getElementById('header');
+    const nav = document.getElementById('mainNav');
+    const aboutLink = nav.querySelector('.about-link');
+    const logo = document.getElementById('logo');
+
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 30) {
+        header.classList.add('scrolled');
+        nav.classList.add('hidden'); // Hakkında gizle
+      } else {
+        header.classList.remove('scrolled');
+        nav.classList.remove('hidden');
+      }
+    });
+
+    // Logo tıklayınca en üst bölüme git
+    logo.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Menüdeki ana menü linki de scroll en üste
+    document.getElementById('homeLink').addEventListener('click', e => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Kategori butonları scrolla yönlendirme
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const targetElem = document.getElementById(targetId);
+        if(targetElem){
+          targetElem.scrollIntoView({behavior: 'smooth'});
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
