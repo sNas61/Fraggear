@@ -2,14 +2,16 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FragGear</title>
   <style>
     body {
       margin: 0;
       font-family: 'Helvetica Neue', sans-serif;
-      background: #0a0a0a;
+      background: #0a0a0a url('https://images.unsplash.com/photo-1604079628044-943dd4d6c134?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center fixed;
+      background-size: cover;
       color: #f0f0f0;
+      overflow-x: hidden;
     }
     header {
       position: fixed;
@@ -46,6 +48,13 @@
       max-width: 1300px;
       margin: auto;
       text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s, transform 1s;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     h1 {
       font-size: 3em;
@@ -67,10 +76,11 @@
       gap: 30px;
     }
     .product {
-      background: #111;
+      background: rgba(17, 17, 17, 0.85);
       padding: 15px;
       border-radius: 10px;
       width: 220px;
+      cursor: pointer;
       transition: transform 0.3s;
     }
     .product:hover {
@@ -86,13 +96,37 @@
       padding: 20px;
       font-size: 0.9em;
     }
-    @media (max-width: 768px) {
-      nav {
-        gap: 15px;
-      }
-      nav a {
-        font-size: 1em;
-      }
+    /* Popup styles */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .popup-content {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      text-align: center;
+    }
+    .popup-content img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .popup-content p {
+      margin-top: 10px;
+    }
+    .close-popup {
+      color: #00cfcf;
+      font-size: 1.2em;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-block;
     }
   </style>
 </head>
@@ -118,15 +152,15 @@
 <section id="products">
   <h2>Ürünler</h2>
   <div class="products">
-    <div class="product">
+    <div class="product" onclick="showPopup('Klavye', 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png')">
       <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye">
       <p>Klavye</p>
     </div>
-    <div class="product">
+    <div class="product" onclick="showPopup('Mouse', 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp')">
       <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse">
       <p>Mouse</p>
     </div>
-    <div class="product">
+    <div class="product" onclick="showPopup('Mousepad', 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg')">
       <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad">
       <p>Mousepad</p>
     </div>
@@ -148,6 +182,39 @@
 <footer>
   &copy; 2025 FragGear | Tüm hakları saklıdır.
 </footer>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <img id="popup-img" src="" alt="">
+    <p id="popup-title"></p>
+    <span class="close-popup" onclick="closePopup()">Kapat</span>
+  </div>
+</div>
+
+<script>
+  // Fade in on scroll
+  const sections = document.querySelectorAll("section");
+  window.addEventListener("scroll", () => {
+    sections.forEach(sec => {
+      const top = window.scrollY + window.innerHeight;
+      if (top > sec.offsetTop + 100) {
+        sec.classList.add("visible");
+      }
+    });
+  });
+
+  // Popup
+  function showPopup(title, img) {
+    document.getElementById("popup-title").innerText = title;
+    document.getElementById("popup-img").src = img;
+    document.getElementById("popup").style.display = "flex";
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+</script>
 
 </body>
 </html>
