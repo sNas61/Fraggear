@@ -1,189 +1,61 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FRAGGEAR</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background: #0a0a0a;
-      color: #f0f0f0;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.9);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 30px;
-      box-sizing: border-box;
-      z-index: 1000;
-    }
-    header img {
-      height: 60px;
-    }
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-    }
-    nav a {
-      color: #00cfcf;
-      text-decoration: none;
-      font-size: 1.1em;
-      font-weight: bold;
-    }
-    nav a:hover {
-      color: #00ffff;
-    }
-    #home, #products, #about, #contact {
-      display: none;
-      padding: 100px 30px 60px;
-      max-width: 1200px;
-      margin: auto;
-      text-align: center;
-    }
-    #home.active, #products.active, #about.active, #contact.active {
-      display: block;
-    }
-    h1 {
-      font-size: 4em;
-      margin-bottom: 10px;
-    }
-    .slogan {
-      font-size: 1.7em;
-      color: #00cfcf;
-    }
-    .products-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      justify-content: center;
-      margin-top: 40px;
-    }
-    .product {
-      background: rgba(17, 17, 17, 0.85);
-      padding: 10px;
-      border-radius: 10px;
-      width: 220px;
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-    .product:hover {
-      transform: scale(1.05);
-    }
-    .product img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    footer {
-      background: #111;
-      color: #888;
-      padding: 20px;
-      font-size: 0.9em;
-      margin-top: 50px;
-    }
-    .back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #00cfcf;
-      color: #000;
-      border-radius: 6px;
-      text-decoration: none;
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <nav>
-    <a href="#" onclick="showSection('products')">ÜRÜNLER</a>
-    <a href="#" onclick="showSection('about')">HAKKINDA</a>
-  </nav>
-  <a href="#" onclick="showSection('home')">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo">
-  </a>
-  <nav>
-    <a href="#" onclick="showSection('contact')">İLETİŞİM</a>
-    <a href="https://instagram.com/" target="_blank">INSTAGRAM</a>
-  </nav>
-</header>
-
-<section id="home" class="active">
-  <h1>FRAGGEAR</h1>
-  <p class="slogan">DESIGNED FOR CHAMPIONS</p>
-</section>
-
-<section id="products">
-  <h2>ÜRÜN KATEGORİLERİ</h2>
-  <div class="products-list">
-    <div class="product" onclick="loadCategory('klavye')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye">
-      <p>Klavye</p>
-    </div>
-    <div class="product" onclick="loadCategory('mouse')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse">
-      <p>Mouse</p>
-    </div>
-    <div class="product" onclick="loadCategory('mousepad')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad">
-      <p>Mousepad</p>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <h2>HAKKINDA</h2>
-  <p>FRAGGEAR esporcular için premium donanım sunar. Kalite ve performans odağındayız.</p>
-  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
-</section>
-
-<section id="contact">
-  <h2>İLETİŞİM</h2>
-  <p>Telefon: 0535 049 5006</p>
-  <p>Email: tahacanoktar11@gmail.com</p>
-  <p>Instagram: <a href="https://instagram.com/" target="_blank" style="color:#00cfcf;">@fraggear</a></p>
-  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
-</section>
-
-<section id="category-page">
-  <h2 id="cat-title"></h2>
-  <div class="products-list" id="cat-products"></div>
-  <a href="#" class="back-btn" onclick="showSection('products')">Ürün Kategorilerine Dön</a>
-</section>
-
-<footer>
-  &copy; 2025 FRAGGEAR | Tüm hakları saklıdır.
-</footer>
+<style>
+  /* Sadece yeni eklemeler/güncellemeler */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+  }
+  .back-btn {
+    padding: 10px;
+    border-radius: 50%;
+    background: #00cfcf;
+    color: #000;
+    font-size: 1.2em;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .back-btn:hover {
+    background: #00ffff;
+  }
+  nav a {
+    transition: color 0.3s, transform 0.3s;
+  }
+  nav a:hover {
+    transform: scale(1.1);
+  }
+</style>
 
 <script>
 function showSection(id) {
-  document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('section').forEach(sec => {
+    sec.classList.remove('active');
+    sec.style.opacity = 0;
+  });
+  setTimeout(() => {
+    document.getElementById(id).classList.add('active');
+    document.getElementById(id).style.opacity = 1;
+  }, 200);
 }
 
 function loadCategory(cat) {
   const data = {
-    klavye: [
-      {title: 'Gaming Klavye', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png'}
-    ],
-    mouse: [
-      {title: 'Gaming Mouse', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp'}
-    ],
-    mousepad: [
-      {title: 'Gaming Mousepad', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg'}
-    ]
+    klavye: Array(8).fill({
+      title: 'Gaming Klavye',
+      img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png'
+    }),
+    mouse: Array(6).fill({
+      title: 'Gaming Mouse',
+      img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp'
+    }),
+    mousepad: Array(5).fill({
+      title: 'Gaming Mousepad',
+      img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg'
+    })
   };
   document.getElementById('cat-title').innerText = cat.toUpperCase();
   const container = document.getElementById('cat-products');
   container.innerHTML = '';
+  container.className = 'products-list products-grid';
   data[cat].forEach(p => {
     const div = document.createElement('div');
     div.className = 'product';
@@ -193,6 +65,3 @@ function loadCategory(cat) {
   showSection('category-page');
 }
 </script>
-
-</body>
-</html>
