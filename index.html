@@ -1,225 +1,11 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FRAGGEAR</title>
-<style>
-  :root {
-    --bg: #0a0a0a;
-    --text: #f0f0f0;
-    --accent: #00cfcf;
-    --footer: #111;
-  }
-  body {
-    margin: 0;
-    font-family: 'Helvetica Neue', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-  }
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(0,0,0,0.9);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 30px;
-    box-sizing: border-box;
-    z-index: 1000;
-  }
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  nav a, .user-btn {
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: color 0.3s, box-shadow 0.3s;
-  }
-  nav a:hover, .user-btn:hover {
-    color: #00ffff;
-    box-shadow: 0 0 10px var(--accent);
-  }
-  section {
-    display: none;
-    padding: 100px 30px 60px;
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
-  }
-  section.active {
-    display: block;
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  h1 {
-    font-size: 4em;
-    margin-bottom: 10px;
-  }
-  .slogan {
-    font-size: 1.7em;
-    color: var(--accent);
-  }
-  .products-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    margin-top: 40px;
-  }
-  .product {
-    background: rgba(17, 17, 17, 0.85);
-    padding: 10px;
-    border-radius: 10px;
-    width: 220px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .product:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px var(--accent);
-  }
-  .product img {
-    width: 100%;
-    border-radius: 8px;
-  }
-  .product p {
-    margin: 10px 0 8px;
-    font-weight: bold;
-  }
-  /* Yeni butonlar */
-  .btn-action {
-    margin-top: auto;
-    background: var(--accent);
-    color: var(--bg);
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: box-shadow 0.3s, transform 0.2s;
-  }
-  .btn-action:hover {
-    box-shadow: 0 0 20px var(--accent);
-    transform: scale(1.1);
-  }
-  .btn-action.buy {
-    background: #00aaff;
-  }
-
-  /* Back butonları için neon efekt */
-  .back-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: var(--accent);
-    color: var(--bg);
-    border-radius: 6px;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    font-weight: bold;
-    transition: box-shadow 0.3s, transform 0.3s;
-  }
-  .back-btn:hover {
-    box-shadow: 0 0 25px var(--accent);
-    transform: scale(1.05);
-  }
-
-  /* Footer sayfanın en altında */
-  footer {
-    background: var(--footer);
-    color: #888;
-    padding: 20px;
-    font-size: 0.9em;
-    text-align: center;
-    width: 100%;
-    margin-top: 40px;
-  }
-
-  /* Basit modal stil - hesap için */
-  .modal-bg {
-    position: fixed;
-    top: 0; left: 0; right:0; bottom: 0;
-    background: rgba(0,0,0,0.8);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-  }
-  .modal-bg.active {
-    display: flex;
-  }
-  .modal {
-    background: var(--bg);
-    padding: 30px;
-    border-radius: 12px;
-    width: 320px;
-    box-sizing: border-box;
-    color: var(--text);
-  }
-  .modal h3 {
-    margin-top: 0;
-  }
-  .modal input {
-    width: 100%;
-    padding: 8px 10px;
-    margin: 10px 0 20px;
-    border-radius: 6px;
-    border: none;
-    outline: none;
-    font-size: 1em;
-  }
-  .modal button {
-    width: 100%;
-    padding: 10px;
-    background: var(--accent);
-    border: none;
-    border-radius: 6px;
-    color: var(--bg);
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .modal button:hover {
-    background: #00ffff;
-  }
-  .close-btn {
-    background: transparent;
-    color: var(--accent);
-    border: none;
-    font-size: 1.2em;
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    cursor: pointer;
-  }
-  .user-area {
-    color: var(--accent);
-    font-weight: bold;
-    cursor: default;
-  }
-</style>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FRAGGEAR</title>
   <style>
+    /* Genel ayarlar */
     body {
       margin: 0;
       font-family: 'Helvetica Neue', sans-serif;
@@ -227,7 +13,15 @@
       color: #f0f0f0;
       overflow-x: hidden;
       scroll-behavior: smooth;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    /* Header */
     header {
       position: fixed;
       top: 0;
@@ -238,238 +32,323 @@
       justify-content: space-between;
       padding: 10px 30px;
       box-sizing: border-box;
-      z-index: 1000;
+      z-index: 1100;
+      height: 60px;
     }
     header img {
-      height: 60px;
+      height: 40px;
+      cursor: pointer;
     }
     nav {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 20px;
     }
     nav a {
       color: #00cfcf;
-      text-decoration: none;
-      font-size: 1.1em;
       font-weight: bold;
+      font-size: 1em;
+      position: relative;
+      padding: 5px 8px;
+      border-radius: 6px;
+      transition: color 0.3s ease;
+      cursor: pointer;
     }
     nav a:hover {
       color: #00ffff;
+      box-shadow: 0 0 10px #00ffff;
     }
     #hamburger {
       cursor: pointer;
-      font-size: 2em;
+      font-size: 24px;
+      color: #00cfcf;
       user-select: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
     }
+    #hamburger:hover {
+      background: #004d4d;
+    }
+    /* Sidebar */
     #sidebar {
       position: fixed;
-      right: -250px;
-      top: 0;
-      width: 250px;
-      height: 100%;
+      top: 60px;
+      left: -220px;
+      width: 200px;
+      height: calc(100vh - 60px);
       background: #111;
-      padding: 20px;
-      box-sizing: border-box;
-      transition: right 0.3s;
-      z-index: 999;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.7);
+      transition: left 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      z-index: 1050;
     }
-    #sidebar.active {
-      right: 0;
+    #sidebar.show {
+      left: 0;
     }
     #sidebar a {
-      display: block;
+      padding: 10px;
+      margin-bottom: 8px;
       color: #00cfcf;
-      margin: 15px 0;
-      text-decoration: none;
-      font-weight: bold;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
     }
-    section {
-      padding: 100px 30px 60px;
+    #sidebar a:hover {
+      background: #004d4d;
+      box-shadow: 0 0 8px #00ffff;
+    }
+    /* Ana içerik */
+    main {
+      flex-grow: 1;
+      padding: 80px 30px 60px;
       max-width: 1200px;
-      margin: auto;
+      margin: 0 auto;
+      width: 100%;
+    }
+    /* Bölümler */
+    section {
+      display: none;
       text-align: center;
     }
-    #category-page, #about, #contact, #products {
-      display: none;
+    section.active {
+      display: block;
     }
-    h1 {
+    h1, h2 {
+      margin-bottom: 20px;
+    }
+    /* Ana sayfa */
+    #home h1 {
       font-size: 4em;
       margin-bottom: 10px;
     }
-    .slogan {
+    #home .slogan {
       font-size: 1.7em;
       color: #00cfcf;
     }
+    /* Ürün listesi */
     .products-list {
       display: flex;
       flex-wrap: wrap;
       gap: 30px;
       justify-content: center;
-      margin-top: 40px;
+      margin-top: 20px;
     }
     .product {
       background: rgba(17, 17, 17, 0.85);
       padding: 10px;
       border-radius: 10px;
       width: 220px;
-      transition: transform 0.3s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      user-select: none;
     }
     .product:hover {
       transform: scale(1.05);
+      box-shadow: 0 0 12px #00ffff;
     }
     .product img {
       width: 100%;
       border-radius: 8px;
+      margin-bottom: 8px;
+      user-select: none;
     }
-    .btn {
+    .product p {
+      margin: 0 0 10px;
+      font-weight: bold;
+    }
+    /* Satın alma ve sepete ekle butonları */
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      justify-content: center;
+    }
+    button {
+      flex: 1;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
+    }
+    .btn-add-cart {
+      background: #00cfcf;
+      color: #000;
+    }
+    .btn-buy {
+      background: #ffaa00;
+      color: #111;
+    }
+    .btn-add-cart:hover {
+      background: #00ffff;
+      box-shadow: 0 0 10px #00ffff;
+    }
+    .btn-buy:hover {
+      background: #ffcc33;
+      box-shadow: 0 0 12px #ffaa00;
+    }
+    /* Geri butonları */
+    .back-btn {
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 25px;
       padding: 10px 20px;
       background: #00cfcf;
       color: #000;
       border-radius: 6px;
       text-decoration: none;
-      position: relative;
-      overflow: hidden;
+      user-select: none;
+      transition: box-shadow 0.3s ease;
     }
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: rgba(0,255,255,0.2);
-      transform: rotate(45deg);
-      transition: all 0.3s;
+    .back-btn:hover {
+      box-shadow: 0 0 12px #00ffff;
     }
-    .btn:hover::before {
-      top: 0;
-      left: 0;
-    }
+    /* Footer */
     footer {
       background: #111;
       color: #888;
-      padding: 20px;
+      padding: 15px 0;
       font-size: 0.9em;
       text-align: center;
-      margin-top: 50px;
+      margin-top: auto;
+      user-select: none;
+      box-shadow: 0 -3px 10px rgba(0,0,0,0.8);
     }
   </style>
 </head>
 <body>
 
-@@ -225,20 +152,19 @@
-<a href="#" onclick="showSection('about')">HAKKINDA</a>
-</nav>
-<a href="#" onclick="showSection('home')">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo" style="height:60px">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo">
-</a>
-<nav>
-    <a href="#" onclick="showSection('contact')">İLETİŞİM</a>
-    <a href="#" onclick="showSection('support')">MÜŞTERİ HİZMETLERİ</a>
+<header>
+  <nav>
+    <a href="#" onclick="showSection('products')">ÜRÜNLER</a>
+    <a href="#" onclick="showSection('about')">HAKKINDA</a>
+  </nav>
 
-    <span id="user-control">
-      <a class="user-btn" onclick="openModal('login')">Giriş Yap</a>
-      <a class="user-btn" onclick="openModal('register')">Kayıt Ol</a>
-    </span>
+  <a href="#" onclick="showSection('home')">
+    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo" />
+  </a>
+
+  <nav id="right-nav">
+    <a href="#" onclick="alert('Müşteri Hizmetleri: 0535 049 5006')">Müşteri Hizmetleri</a>
+    <a href="#" onclick="alert('Canlı Destek Aktif!')">Canlı Destek</a>
     <div id="hamburger" onclick="toggleSidebar()">☰</div>
-</nav>
+  </nav>
 </header>
 
-<section id="home" class="active">
 <div id="sidebar">
-  <a href="#" onclick="showLogin()">GİRİŞ YAP</a>
-  <a href="#" onclick="showRegister()">KAYIT OL</a>
+  <a href="#" onclick="showSection('home'); toggleSidebar()">Ana Sayfa</a>
+  <a href="#" onclick="showSection('products'); toggleSidebar()">Ürünler</a>
+  <a href="#" onclick="showSection('about'); toggleSidebar()">Hakkında</a>
 </div>
 
-<section id="home">
-<h1>FRAGGEAR</h1>
-<p class="slogan">DESIGNED FOR CHAMPIONS</p>
-</section>
-@@ -247,15 +173,15 @@ <h1>FRAGGEAR</h1>
-<h2>ÜRÜN KATEGORİLERİ</h2>
-<div class="products-list">
-<div class="product" onclick="loadCategory('klavye')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye" />
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye">
-<p>Klavye</p>
-</div>
-<div class="product" onclick="loadCategory('mouse')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse" />
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse">
-<p>Mouse</p>
-</div>
-<div class="product" onclick="loadCategory('mousepad')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad" />
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad">
-<p>Mousepad</p>
-</div>
-</div>
-@@ -264,175 +190,83 @@ <h2>ÜRÜN KATEGORİLERİ</h2>
-<section id="about">
-<h2>HAKKINDA</h2>
-<p>FRAGGEAR esporcular için premium donanım sunar. Kalite ve performans odağındayız.</p>
-  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
-  <a href="#" class="btn" onclick="showSection('home')">Ana Menüye Dön</a>
-</section>
+<main>
+  <section id="home" class="active">
+    <h1>FRAGGEAR</h1>
+    <p class="slogan">DESIGNED FOR CHAMPIONS</p>
+  </section>
 
-<section id="contact">
-<h2>İLETİŞİM</h2>
-<p>Telefon: 0535 049 5006</p>
-<p>Email: tahacanoktar11@gmail.com</p>
-  <p>Instagram: <a href="https://instagram.com/" target="_blank" style="color:var(--accent);">@fraggear</a></p>
-  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
-</section>
+  <section id="products">
+    <h2>ÜRÜN KATEGORİLERİ</h2>
+    <div class="products-list" id="product-categories">
+      <div class="product" onclick="loadCategory('klavye')">
+        <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye" />
+        <p>Klavye</p>
+      </div>
+      <div class="product" onclick="loadCategory('mouse')">
+        <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse" />
+        <p>Mouse</p>
+      </div>
+      <div class="product" onclick="loadCategory('mousepad')">
+        <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad" />
+        <p>Mousepad</p>
+      </div>
+    </div>
+  </section>
 
-<section id="support">
-  <h2>MÜŞTERİ HİZMETLERİ</h2>
-  <p>Her türlü soru ve destek için bize ulaşabilirsiniz.</p>
-  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
-  <a href="#" class="btn" onclick="showSection('home')">Ana Menüye Dön</a>
-</section>
+  <section id="category-page">
+    <h2 id="cat-title">Kategori</h2>
+    <div class="products-list" id="cat-products"></div>
+    <a href="#" class="back-btn" onclick="showSection('products')">Ürün Kategorilerine Dön</a>
+  </section>
 
-<section id="category-page">
-<h2 id="cat-title"></h2>
-<div class="products-list" id="cat-products"></div>
-  <a href="#" class="back-btn" onclick="showSection('products')">Ürün Kategorilerine Dön</a>
-  <a href="#" class="btn" onclick="showSection('products')">Ürün Kategorilerine Dön</a>
-</section>
+  <section id="about">
+    <h2>HAKKINDA</h2>
+    <p>FRAGGEAR esporcular için premium donanım sunar. Kalite ve performans odağındayız.</p>
+    <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
+  </section>
+
+  <section id="contact">
+    <h2>İLETİŞİM</h2>
+    <p>Telefon: 0535 049 5006</p>
+    <p>Email: tahacanoktar11@gmail.com</p>
+    <p>Instagram: <a href="https://instagram.com/fraggear" target="_blank" style="color:#00cfcf;">@fraggear</a></p>
+    <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
+  </section>
+
+  <section id="account" style="display:none;">
+    <h2>Hesap</h2>
+    <div id="account-message" style="margin-bottom: 15px; color:#00cfcf;"></div>
+    <div id="account-forms">
+      <form id="login-form" style="margin-bottom:15px;">
+        <h3>Giriş Yap</h3>
+        <input type="text" id="login-username" placeholder="Kullanıcı Adı" required />
+        <input type="password" id="login-password" placeholder="Şifre" required />
+        <button type="submit">Giriş Yap</button>
+      </form>
+      <form id="register-form">
+        <h3>Kayıt Ol</h3>
+        <input type="text" id="register-username" placeholder="Kullanıcı Adı" required />
+        <input type="password" id="register-password" placeholder="Şifre" required />
+        <button type="submit">Kayıt Ol</button>
+      </form>
+    </div>
+    <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
+  </section>
+</main>
 
 <footer>
-&copy; 2025 FRAGGEAR | Tüm hakları saklıdır.
+  &copy; 2025 FRAGGEAR | Tüm hakları saklıdır.
 </footer>
 
-<!-- Modal for login/register -->
-<div id="modal-bg" class="modal-bg" onclick="closeModal(event)">
-  <div class="modal" onclick="event.stopPropagation()">
-    <button class="close-btn" onclick="closeModal()">×</button>
-    <div id="login-form">
-      <h3>Giriş Yap</h3>
-      <input type="text" id="login-username" placeholder="Kullanıcı Adı" />
-      <input type="password" id="login-password" placeholder="Şifre" />
-      <button onclick="login()">Giriş Yap</button>
-    </div>
-    <div id="register-form" style="display:none;">
-      <h3>Kayıt Ol</h3>
-      <input type="text" id="reg-username" placeholder="Kullanıcı Adı" />
-      <input type="password" id="reg-password" placeholder="Şifre" />
-      <button onclick="register()">Kayıt Ol</button>
-    </div>
-  </div>
-</div>
-
 <script>
-  // Show section
-  function showSection(id) {
-    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+  // Sidebar aç/kapa
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('show');
   }
 
-  // Load products in category with sepete ekle ve satın al butonu
+  // Sayfa göster
+  function showSection(id) {
+    // Sidebar varsa kapat
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar.classList.contains('show')) sidebar.classList.remove('show');
+
+    // Tüm sectionları gizle
+    document.querySelectorAll('main section').forEach(s => s.classList.remove('active'));
+    // Hesap formu ise özel davran
+    if (id === 'account') {
+      document.getElementById('account').style.display = 'block';
+      document.getElementById('home').classList.remove('active');
+      document.getElementById('products').classList.remove('active');
+      document.getElementById('category-page').classList.remove('active');
+      document.getElementById('about').classList.remove('active');
+      document.getElementById('contact').classList.remove('active');
+      document.getElementById('account').scrollIntoView({behavior:"smooth"});
+    } else {
+      // Diğerlerini göster
+      document.getElementById(id).classList.add('active');
+      // Hesap görünümünü gizle
+      document.getElementById('account').style.display = 'none';
+    }
+  }
+
+  // Ürün kategorisi yükle
   function loadCategory(cat) {
     const data = {
       klavye: [
@@ -482,158 +361,135 @@
         {title: 'Gaming Mousepad', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg'}
       ]
     };
-    document.getElementById('cat-title').innerText = cat.toUpperCase();
     const container = document.getElementById('cat-products');
     container.innerHTML = '';
+
+    document.getElementById('cat-title').innerText = cat.toUpperCase();
+
     data[cat].forEach(p => {
       const div = document.createElement('div');
       div.className = 'product';
-      div.innerHTML = `
-        <img src="${p.img}" alt="${p.title}">
-        <p>${p.title}</p>
-        <button class="btn-action add-to-cart" onclick="addToCart('${p.title}')">Sepete Ekle</button>
-        <button class="btn-action buy" onclick="buyNow('${p.title}')">Satın Al</button>
-      `;
+
+      // Butonlar
+      const addBtn = document.createElement('button');
+      addBtn.className = 'btn-add-cart';
+      addBtn.textContent = 'Sepete Ekle';
+      addBtn.onclick = (e) => {
+        e.stopPropagation();
+        alert(p.title + ' sepete eklendi!');
+      };
+
+      const buyBtn = document.createElement('button');
+      buyBtn.className = 'btn-buy';
+      buyBtn.textContent = 'Satın Al';
+      buyBtn.onclick = (e) => {
+        e.stopPropagation();
+        alert(p.title + ' satın alma sayfasına yönlendiriliyorsunuz!');
+      };
+
+      // İçerik
+      div.innerHTML = `<img src="${p.img}" alt="${p.title}"><p>${p.title}</p>`;
+      const btnGroup = document.createElement('div');
+      btnGroup.className = 'btn-group';
+      btnGroup.appendChild(addBtn);
+      btnGroup.appendChild(buyBtn);
+
+      div.appendChild(btnGroup);
       container.appendChild(div);
     });
     showSection('category-page');
   }
-function showSection(id) {
-  document.querySelectorAll('section').forEach(sec => sec.style.display = 'none');
-  document.getElementById(id).style.display = 'block';
-}
 
-  // Sepete ekle efekti + alert demo
-  function addToCart(item) {
-    alert(`${item} sepete eklendi!`);
+  // Kullanıcı yönetimi (basit localStorage)
+  function normalizeUsername(name) {
+    return name.toLowerCase();
   }
 
-  // Satın al demo alert
-  function buyNow(item) {
-    alert(`${item} satın alma sayfasına yönlendiriliyor...`);
+  function saveUser(username, password) {
+    const users = JSON.parse(localStorage.getItem('fraggearUsers') || '{}');
+    users[normalizeUsername(username)] = password;
+    localStorage.setItem('fraggearUsers', JSON.stringify(users));
   }
-function loadCategory(cat) {
-  const data = {
-    klavye: [
-      {title: 'Gaming Klavye', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png'}
-    ],
-    mouse: [
-      {title: 'Gaming Mouse', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp'}
-    ],
-    mousepad: [
-      {title: 'Gaming Mousepad', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg'}
-    ]
-  };
-  document.getElementById('cat-title').innerText = cat.toUpperCase();
-  const container = document.getElementById('cat-products');
-  container.innerHTML = '';
-  data[cat].forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'product';
-    div.innerHTML = `<img src="${p.img}" alt="${p.title}">
-                     <p>${p.title}</p>
-                     <a class="btn" href="#">Sepete Ekle</a>`;
-    container.appendChild(div);
-  });
-  showSection('category-page');
-}
 
-  // Modal kontrol
-  function openModal(form) {
-    document.getElementById('modal-bg').classList.add('active');
-    if(form === 'login') {
-      document.getElementById('login-form').style.display = 'block';
-      document.getElementById('register-form').style.display = 'none';
+  function getUserPassword(username) {
+    const users = JSON.parse(localStorage.getItem('fraggearUsers') || '{}');
+    return users[normalizeUsername(username)];
+  }
+
+  function isUserRegistered(username) {
+    return !!getUserPassword(username);
+  }
+
+  function showAccountMessage(msg, color = '#00cfcf') {
+    const msgBox = document.getElementById('account-message');
+    msgBox.innerText = msg;
+    msgBox.style.color = color;
+  }
+
+  // Oturum kontrolü - kullanıcı var ise otomatik giriş
+  function checkAutoLogin() {
+    const loggedUser = localStorage.getItem('fraggearLoggedInUser');
+    if (loggedUser) {
+      showAccountMessage('Hoşgeldin, ' + loggedUser + '! Oturum açıldı.');
+      showSection('home');
     } else {
-      document.getElementById('login-form').style.display = 'none';
-      document.getElementById('register-form').style.display = 'block';
+      showSection('home');
     }
-  }
-  function closeModal(e) {
-    if(!e || e.target.id === 'modal-bg' || e.target.className === 'close-btn') {
-      document.getElementById('modal-bg').classList.remove('active');
-    }
-  }
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('active');
-}
-
-  // Basit kullanıcı kaydı ve oturum açma demo (localStorage)
-  function register() {
-    const username = document.getElementById('reg-username').value.trim();
-    const password = document.getElementById('reg-password').value.trim();
-    if(!username || !password) {
-      alert('Lütfen kullanıcı adı ve şifre girin!');
-      return;
-    }
-    if(localStorage.getItem('user_' + username)) {
-      alert('Bu kullanıcı adı zaten kayıtlı!');
-      return;
-    }
-    localStorage.setItem('user_' + username, password);
-    alert('Kayıt başarılı! Giriş yapabilirsiniz.');
-    openModal('login');
-  }
-  function login() {
-    const username = document.getElementById('login-username').value.trim();
-    const password = document.getElementById('login-password').value.trim();
-    if(!username || !password) {
-      alert('Lütfen kullanıcı adı ve şifre girin!');
-      return;
-    }
-    const storedPass = localStorage.getItem('user_' + username);
-    if(storedPass && storedPass === password) {
-      alert('Hoşgeldin, ' + username);
-      closeModal();
-      setUser(username);
-function showLogin() {
-  let username = prompt("Kullanıcı Adı (büyük/küçük harf duyarsız):");
-  let password = prompt("Şifre (büyük/küçük harf duyarlı):");
-  let stored = JSON.parse(localStorage.getItem('fragUser')) || {};
-  if (stored.username && stored.password) {
-    if (stored.username.toLowerCase() === username.toLowerCase() && stored.password === password) {
-      alert("Giriş başarılı!");
-} else {
-      alert('Kullanıcı adı veya şifre yanlış!');
-      alert("Hatalı giriş!");
-}
-  } else {
-    alert("Önce kayıt olmalısınız.");
-}
-}
-
-  // Kullanıcı oturum kontrolü
-  function setUser(username) {
-    const userControl = document.getElementById('user-control');
-    userControl.innerHTML = `
-      <span class="user-area">Merhaba, ${username}</span>
-      <a class="user-btn" onclick="logout()">Çıkış Yap</a>
-    `;
-  }
-  function logout() {
-    alert('Çıkış yapıldı!');
-    const userControl = document.getElementById('user-control');
-    userControl.innerHTML = `
-      <a class="user-btn" onclick="openModal('login')">Giriş Yap</a>
-      <a class="user-btn" onclick="openModal('register')">Kayıt Ol</a>
-    `;
   }
 
-  // Sayfa yüklendiğinde kontrol
-  document.addEventListener('DOMContentLoaded', () => {
-    // Eğer sessionStorage'da kullanıcı varsa otomatik giriş yap
-    const loggedUser = sessionStorage.getItem('loggedUser');
-    if(loggedUser) {
-      setUser(loggedUser);
+  // Formlar
+  document.getElementById('register-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const username = e.target['register-username'].value.trim();
+    const password = e.target['register-password'].value;
+
+    if (username.length < 3) {
+      showAccountMessage('Kullanıcı adı en az 3 karakter olmalı!', 'red');
+      return;
     }
+    if (password.length < 6) {
+      showAccountMessage('Şifre en az 6 karakter olmalı!', 'red');
+      return;
+    }
+
+    if (isUserRegistered(username)) {
+      showAccountMessage('Bu kullanıcı adı zaten alınmış.', 'red');
+      return;
+    }
+
+    saveUser(username, password);
+    localStorage.setItem('fraggearLoggedInUser', normalizeUsername(username));
+    showAccountMessage('Kayıt başarılı! Hoşgeldin, ' + username + '!');
+    e.target.reset();
+    showSection('home');
   });
 
-function showRegister() {
-  let username = prompt("Kullanıcı Adı (büyük/küçük harf duyarsız olacak şekilde kaydedilecek):");
-  let password = prompt("Şifre (büyük/küçük harf duyarlı):");
-  localStorage.setItem('fragUser', JSON.stringify({username, password}));
-  alert("Kayıt başarılı, otomatik giriş yapıldı.");
-}
+  document.getElementById('login-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const username = e.target['login-username'].value.trim();
+    const password = e.target['login-password'].value;
+
+    if (!isUserRegistered(username)) {
+      showAccountMessage('Böyle bir kullanıcı bulunamadı.', 'red');
+      return;
+    }
+
+    if (getUserPassword(username) !== password) {
+      showAccountMessage('Şifre yanlış.', 'red');
+      return;
+    }
+
+    localStorage.setItem('fraggearLoggedInUser', normalizeUsername(username));
+    showAccountMessage('Giriş başarılı! Hoşgeldin, ' + username + '!');
+    e.target.reset();
+    showSection('home');
+  });
+
+  // Sayfa yüklendiğinde otomatik kontrol et
+  window.addEventListener('load', () => {
+    checkAutoLogin();
+  });
 </script>
 
 </body>
+</html>
