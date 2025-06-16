@@ -11,10 +11,11 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     body {
-      background: #121212;
-      color: #eee;
+      background: #0a162f; /* koyu mavi */
+      color: #e0f7fa; /* açık turkuaz-beyaz */
       line-height: 1.6;
-      min-height: 200vh;
+      min-height: 300vh;
+      scroll-behavior: smooth;
     }
     a {
       color: inherit;
@@ -30,18 +31,18 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       height: 60px;
-      background: rgba(18,18,18,0.95);
+      background: rgba(10,22,47,0.95);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 25px;
       z-index: 9999;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid #055e82;
       transition: background 0.3s ease;
     }
     header.scrolled {
-      background: rgba(18,18,18,1);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+      background: rgba(10,22,47,1);
+      box-shadow: 0 2px 10px rgba(0,90,140,0.7);
     }
 
     .logo {
@@ -59,18 +60,19 @@
     nav {
       display: flex;
       align-items: center;
-      gap: 25px;
+      gap: 28px;
       font-weight: 600;
       font-size: 17px;
+      color: #80deea;
     }
     nav a {
-      padding: 6px 10px;
-      border-radius: 6px;
-      transition: background 0.2s ease;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: background 0.25s ease, color 0.25s ease;
     }
     nav a:hover {
-      background: #ff3c00;
-      color: #fff;
+      background: #80deea;
+      color: #003440;
     }
 
     /* Ana Menü ve Hakkında link gizleme için */
@@ -81,144 +83,195 @@
       display: none;
     }
 
-    /* Ana Menü - Kategoriler */
+    /* Ana Menü - Kategoriler - orta kısımda büyük ve ortalanmış */
     .categories {
-      max-width: 960px;
-      margin: 100px auto 40px auto;
+      max-width: 900px;
+      margin: 110px auto 40px auto;
       display: flex;
       justify-content: center;
-      gap: 40px;
+      gap: 45px;
       flex-wrap: wrap;
       z-index: 10;
       position: relative;
     }
     .category-btn {
-      background: #ff3c00;
-      color: #fff;
+      background: #00bcd4;
+      color: #003440;
       font-size: 28px;
-      padding: 25px 40px;
-      border-radius: 14px;
+      padding: 30px 55px;
+      border-radius: 16px;
       font-weight: 700;
-      box-shadow: 0 4px 15px rgb(255 60 0 / 0.7);
+      box-shadow: 0 5px 20px rgb(0 188 212 / 0.7);
       cursor: pointer;
       user-select: none;
       transition: background 0.3s ease;
       text-align: center;
-      min-width: 200px;
+      min-width: 220px;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      filter: drop-shadow(0 0 6px #00bcd4);
     }
     .category-btn:hover {
-      background: #e63700;
-      box-shadow: 0 6px 20px rgb(230 55 0 / 0.9);
+      background: #00acc1;
+      box-shadow: 0 7px 30px rgb(0 172 193 / 0.9);
+      color: #001f23;
     }
 
-    /* Ürünler Bölümü */
+    /* Ürünler Bölümü - görünmez başlangıçta */
     .products-section {
       max-width: 960px;
-      margin: 60px auto 100px auto;
-      padding: 0 10px;
+      margin: 0 auto 100px auto;
+      padding: 0 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 55px;
+      opacity: 0;
+      transform: translateY(60px);
+      pointer-events: none;
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
+    .products-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      margin-top: 50px;
+    }
+
     .products-section h2 {
       text-align: center;
       font-size: 34px;
-      margin-bottom: 25px;
-      color: #ff3c00;
+      margin-bottom: 22px;
+      color: #00bcd4;
       font-weight: 700;
-      letter-spacing: 1.2px;
+      letter-spacing: 1.3px;
+      user-select: none;
+      filter: drop-shadow(0 0 4px #00bcd4);
     }
     .product-list {
       display: flex;
       justify-content: center;
       gap: 30px;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none; /* Firefox */
+    }
+    .product-list::-webkit-scrollbar {
+      display: none; /* Chrome Safari */
     }
     .product {
-      background: #222;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgb(0 0 0 / 0.7);
-      width: 260px;
-      padding: 20px;
+      background: #004d59;
+      border-radius: 14px;
+      box-shadow: 0 5px 20px rgba(0, 153, 179, 0.6);
+      min-width: 280px;
+      padding: 22px;
       text-align: center;
       transition: transform 0.3s ease;
       cursor: default;
       user-select: none;
+      flex-shrink: 0;
     }
     .product:hover {
       transform: scale(1.06);
-      box-shadow: 0 6px 30px rgb(255 60 0 / 0.8);
+      box-shadow: 0 10px 35px rgba(0, 188, 212, 0.9);
     }
     .product img {
       width: 100%;
-      height: 160px;
+      height: 170px;
       object-fit: contain;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      background: #111;
-      padding: 10px;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      background: #012f3c;
+      padding: 12px;
     }
     .product h3 {
-      font-size: 22px;
-      color: #ff3c00;
-      margin-bottom: 8px;
+      font-size: 24px;
+      color: #00e5ff;
+      margin-bottom: 10px;
+      text-shadow: 0 0 8px #00bcd4;
     }
     .product p {
-      color: #ccc;
-      font-size: 15px;
-      min-height: 50px;
+      color: #b2ebf2;
+      font-size: 16px;
+      min-height: 60px;
+      user-select: text;
+      letter-spacing: 0.03em;
     }
 
-    /* Hakkında Bölümü (Başlangıçta gizli) */
+    /* Hakkında Bölümü (başlangıçta gizli) */
     #about-section {
       max-width: 900px;
       margin: 120px auto 100px auto;
-      padding: 20px;
-      background: #222;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(255 60 0, 0.6);
+      padding: 25px 30px;
+      background: #004d59;
+      border-radius: 18px;
+      box-shadow: 0 8px 26px rgba(0, 188, 212, 0.7);
       display: none;
-      color: #fff;
+      color: #e0f7fa;
       font-size: 18px;
-      line-height: 1.5;
+      line-height: 1.6;
+      user-select: text;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    #about-section.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
     #about-section h2 {
       text-align: center;
       font-size: 36px;
       margin-bottom: 25px;
-      color: #ff3c00;
+      color: #00bcd4;
       font-weight: 700;
       letter-spacing: 1.3px;
+      filter: drop-shadow(0 0 7px #00bcd4);
+      user-select: none;
     }
 
     /* Footer */
     footer {
-      background: #1a1a1a;
-      padding: 30px 20px;
-      color: #bbb;
+      background: #012f3c;
+      padding: 35px 20px;
+      color: #b2ebf2;
       text-align: center;
       font-size: 16px;
-      border-top: 1px solid #333;
+      border-top: 1px solid #004d59;
       user-select: none;
+      filter: drop-shadow(0 0 4px #00bcd4);
     }
     footer a {
-      color: #ff3c00;
+      color: #00bcd4;
       font-weight: 700;
     }
     footer p {
       margin-bottom: 8px;
+      user-select: text;
     }
 
     /* Responsive */
-    @media (max-width: 720px) {
+    @media (max-width: 900px) {
       .category-btn {
-        font-size: 22px;
-        padding: 18px 30px;
-        min-width: 150px;
+        font-size: 24px;
+        padding: 25px 40px;
+        min-width: 180px;
+      }
+      .products-section {
+        flex-direction: column;
+        gap: 40px;
+        padding: 0 10px;
+      }
+      .product-list {
+        overflow-x: auto;
+        flex-wrap: nowrap;
       }
       .product {
-        width: 90%;
+        min-width: 240px;
         margin-bottom: 25px;
       }
       #about-section {
-        margin: 100px 15px 50px 15px;
+        margin: 90px 15px 50px 15px;
         font-size: 16px;
       }
     }
@@ -233,6 +286,7 @@
     <nav id="mainNav">
       <a href="#top" class="home-link" id="homeLink">Ana Menü</a>
       <a href="#" class="about-link" id="aboutLink">Hakkında</a>
+      <a href="#" class="products-btn" id="productsBtn">Ürünler</a>
     </nav>
   </header>
 
@@ -244,7 +298,7 @@
       <div class="category-btn" data-target="mousepad-section">Mousepad</div>
     </section>
 
-    <!-- Ürünler -->
+    <!-- Ürünler Bölümü (başlangıçta gizli ve aşağıda) -->
     <section class="products-section" id="products-section">
 
       <h2 id="keyboard-section">Klavye Ürünleri</h2>
@@ -276,7 +330,7 @@
 
     </section>
 
-    <!-- Hakkında -->
+    <!-- Hakkında Bölümü (başlangıçta gizli) -->
     <section id="about-section">
       <h2>Hakkında</h2>
       <p>
@@ -308,42 +362,49 @@
     const logo = document.getElementById('logo');
     const homeLink = document.getElementById('homeLink');
     const aboutLink = document.getElementById('aboutLink');
+    const productsBtn = document.getElementById('productsBtn');
     const categories = document.querySelector('.categories');
     const productsSection = document.getElementById('products-section');
     const aboutSection = document.getElementById('about-section');
-
-    // Başlangıçta Hakkında gizli, ürünler ve kategoriler görünür
-    aboutSection.style.display = 'none';
 
     // Scroll ile header arka plan koyulaştırma
     window.addEventListener('scroll', () => {
       if(window.scrollY > 30) {
         header.classList.add('scrolled');
-        nav.classList.add('hidden'); // Hakkında link gizlenir scrollda
       } else {
         header.classList.remove('scrolled');
-        nav.classList.remove('hidden');
       }
     });
 
     // Logo tıklayınca ana menüye scroll
     logo.addEventListener('click', () => {
-      showHome();
+      hideSectionsExcept('home');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // Ana Menü link tıklama
     homeLink.addEventListener('click', e => {
       e.preventDefault();
-      showHome();
+      hideSectionsExcept('home');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Hakkında link tıklama - tek sayfa gösterimi
+    // Hakkında link tıklama
     aboutLink.addEventListener('click', e => {
       e.preventDefault();
-      showAbout();
+      hideSectionsExcept('about');
+      // Estetik fade-in efekti için opacity transform vs zaten var CSS'te
       window.scrollTo({ top: 80, behavior: 'smooth' });
+    });
+
+    // Ürünler butonuna tıklayınca ürünleri aşağıya scroll ve göster
+    productsBtn.addEventListener('click', e => {
+      e.preventDefault();
+      hideSectionsExcept('products');
+      // products-section görünür yapıldı
+      productsSection.classList.add('visible');
+      const yOffset = productsSection.getBoundingClientRect().top + window.pageYOffset - 65;
+      window.scrollTo({ top: yOffset, behavior: 'smooth' });
     });
 
     // Kategori butonları scrolla yönlendirme
@@ -352,33 +413,40 @@
         const targetId = btn.getAttribute('data-target');
         const targetElem = document.getElementById(targetId);
         if(targetElem){
-          targetElem.scrollIntoView({behavior: 'smooth'});
+          const yOffset = targetElem.getBoundingClientRect().top + window.pageYOffset - 65;
+          window.scrollTo({top: yOffset, behavior: 'smooth'});
         }
       });
     });
 
-    // Fonksiyonlar
-    function showHome() {
-      categories.style.display = 'flex';
-      productsSection.style.display = 'block';
-      aboutSection.style.display = 'none';
-
-      // Menüde link gösterimi
-      nav.classList.remove('hidden');
-      homeLink.style.display = 'inline-block';
-      aboutLink.style.display = 'inline-block';
+    function hideSectionsExcept(section) {
+      if(section === 'home') {
+        categories.style.display = 'flex';
+        productsSection.classList.remove('visible');
+        aboutSection.classList.remove('visible');
+        aboutSection.style.display = 'none';
+      }
+      else if(section === 'products') {
+        categories.style.display = 'none';
+        productsSection.style.display = 'block';
+        aboutSection.classList.remove('visible');
+        aboutSection.style.display = 'none';
+        productsSection.classList.add('visible');
+      }
+      else if(section === 'about') {
+        categories.style.display = 'none';
+        productsSection.classList.remove('visible');
+        productsSection.style.display = 'none';
+        aboutSection.style.display = 'block';
+        setTimeout(() => {
+          aboutSection.classList.add('visible');
+        }, 50);
+      }
     }
 
-    function showAbout() {
-      categories.style.display = 'none';
-      productsSection.style.display = 'none';
-      aboutSection.style.display = 'block';
+    // Başlangıçta ana menü görünür, ürünler ve hakkında gizli
+    hideSectionsExcept('home');
 
-      // Menüde sadece Ana Menü linki göster
-      nav.classList.remove('hidden');
-      homeLink.style.display = 'inline-block';
-      aboutLink.style.display = 'inline-block';
-    }
   </script>
 
 </body>
