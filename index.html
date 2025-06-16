@@ -7,47 +7,74 @@
   <style>
     body {
       margin: 0;
-      font-family: sans-serif;
+      font-family: 'Helvetica Neue', sans-serif;
       background: #0a0a0a;
-      color: #eee;
+      color: #f0f0f0;
     }
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.85);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 20px;
+      padding: 15px 30px;
+      box-sizing: border-box;
       z-index: 1000;
     }
     header img {
-      height: 60px;
+      height: 70px;
+    }
+    nav {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
     }
     nav a {
       color: #00cfcf;
-      margin: 0 10px;
       text-decoration: none;
+      font-size: 1.1em;
       font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #00ffff;
     }
     section {
-      padding: 100px 20px 50px;
-      max-width: 1200px;
+      padding: 120px 30px 60px;
+      max-width: 1300px;
       margin: auto;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .slogan {
+      font-size: 1.2em;
+      color: #00cfcf;
+      margin-bottom: 40px;
     }
     .products {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
+      gap: 30px;
     }
     .product {
       background: #111;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-      width: 200px;
+      padding: 15px;
+      border-radius: 10px;
+      width: 220px;
+      transition: transform 0.3s;
+    }
+    .product:hover {
+      transform: scale(1.05);
     }
     .product img {
       width: 100%;
@@ -56,16 +83,25 @@
     footer {
       background: #111;
       color: #888;
-      text-align: center;
       padding: 20px;
-      margin-top: 50px;
+      font-size: 0.9em;
+    }
+    @media (max-width: 768px) {
+      nav {
+        gap: 15px;
+      }
+      nav a {
+        font-size: 1em;
+      }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <a href="#home"><img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FragGear Logo"></a>
+  <a href="#home">
+    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FragGear Logo">
+  </a>
   <nav>
     <a href="#products">Ürünler</a>
     <a href="#about">Hakkında</a>
@@ -75,7 +111,8 @@
 
 <section id="home">
   <h1>FragGear</h1>
-  <p>Espor tutkunları için en iyi ekipmanlar burada!</p>
+  <p class="slogan">Espor tutkunları için mükemmel ekipman</p>
+  <p class="slogan">Kalite, hız ve dayanıklılık!</p>
 </section>
 
 <section id="products">
@@ -98,7 +135,7 @@
 
 <section id="about">
   <h2>Hakkında</h2>
-  <p>FragGear esporcular için en iyi donanımı sunmayı hedefler. Kalite ve performans önceliğimizdir.</p>
+  <p>FragGear esporcular için en iyi donanımı sunmayı hedefler. Mükemmeliyet, kalite ve yenilik bizim işimiz.</p>
 </section>
 
 <section id="contact">
@@ -109,7 +146,7 @@
 </section>
 
 <footer>
-  &copy; 2025 FragGear
+  &copy; 2025 FragGear | Tüm hakları saklıdır.
 </footer>
 
 </body>
