@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FragGear</title>
+  <title>FRAGGEAR</title>
   <style>
     body {
       margin: 0;
@@ -36,7 +36,7 @@
     nav a {
       color: #00cfcf;
       text-decoration: none;
-      font-size: 1.1em;
+      font-size: 1.2em;
       font-weight: bold;
       transition: color 0.3s;
     }
@@ -57,17 +57,14 @@
       transform: translateY(0);
     }
     h1 {
-      font-size: 3em;
+      font-size: 4em;
+      letter-spacing: 2px;
       margin-bottom: 10px;
     }
-    h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
     .slogan {
-      font-size: 1.2em;
+      font-size: 1.5em;
       color: #00cfcf;
-      margin-bottom: 40px;
+      margin: 10px 0;
     }
     .products {
       display: flex;
@@ -96,7 +93,6 @@
       padding: 20px;
       font-size: 0.9em;
     }
-    /* Popup styles */
     .popup {
       display: none;
       position: fixed;
@@ -134,23 +130,23 @@
 
 <header>
   <a href="#home">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FragGear Logo">
+    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo">
   </a>
   <nav>
-    <a href="#products">Ürünler</a>
-    <a href="#about">Hakkında</a>
-    <a href="#contact">İletişim</a>
+    <a href="#products">ÜRÜNLER</a>
+    <a href="#about">HAKKINDA</a>
+    <a href="#contact">İLETİŞİM</a>
   </nav>
 </header>
 
 <section id="home">
-  <h1>FragGear</h1>
-  <p class="slogan">Espor tutkunları için mükemmel ekipman</p>
-  <p class="slogan">Kalite, hız ve dayanıklılık!</p>
+  <h1>FRAGGEAR</h1>
+  <p class="slogan">DESIGNED FOR CHAMPIONS</p>
+  <p class="slogan">PERFORMANCE UNLEASHED</p>
 </section>
 
 <section id="products">
-  <h2>Ürünler</h2>
+  <h2>ÜRÜNLER</h2>
   <div class="products">
     <div class="product" onclick="showPopup('Klavye', 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png')">
       <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye">
@@ -168,22 +164,21 @@
 </section>
 
 <section id="about">
-  <h2>Hakkında</h2>
-  <p>FragGear esporcular için en iyi donanımı sunmayı hedefler. Mükemmeliyet, kalite ve yenilik bizim işimiz.</p>
+  <h2>HAKKINDA</h2>
+  <p>FRAGGEAR esporcular için en iyi donanımı sunmayı hedefler. Mükemmeliyet, kalite ve yenilik bizim işimiz.</p>
 </section>
 
 <section id="contact">
-  <h2>İletişim</h2>
+  <h2>İLETİŞİM</h2>
   <p>Telefon: 0535 049 5006</p>
   <p>Email: tahacanoktar11@gmail.com</p>
   <p>Instagram: <a href="https://instagram.com/" target="_blank" style="color:#00cfcf;">@fraggear</a></p>
 </section>
 
 <footer>
-  &copy; 2025 FragGear | Tüm hakları saklıdır.
+  &copy; 2025 FRAGGEAR | Tüm hakları saklıdır.
 </footer>
 
-<!-- POPUP -->
 <div class="popup" id="popup">
   <div class="popup-content">
     <img id="popup-img" src="" alt="">
@@ -193,7 +188,6 @@
 </div>
 
 <script>
-  // Fade in on scroll
   const sections = document.querySelectorAll("section");
   window.addEventListener("scroll", () => {
     sections.forEach(sec => {
@@ -204,7 +198,6 @@
     });
   });
 
-  // Popup
   function showPopup(title, img) {
     document.getElementById("popup-title").innerText = title;
     document.getElementById("popup-img").src = img;
