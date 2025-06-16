@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FragGear</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0faff;
+      color: #003f5c;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    header img {
+      height: 50px;
+      cursor: pointer;
+    }
+
+    main {
+      padding-top: 70px;
+    }
+
+    .center-btn {
+      text-align: center;
+      margin: 50px 0;
+    }
+
+    .center-btn button {
+      padding: 15px 30px;
+      font-size: 20px;
+      background-color: #00b4d8;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .center-btn button:hover {
+      background-color: #0077b6;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 50px 0;
+    }
+
+    .categories button {
+      padding: 20px 40px;
+      font-size: 18px;
+      background-color: #90e0ef;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .categories button:hover {
+      background-color: #00b4d8;
+      color: white;
+    }
+
+    .products {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 50px 0;
+    }
+
+    .product {
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      background: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 5px;
+    }
+
+    footer {
+      background-color: #caf0f8;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+
+    a {
+      color: #0077b6;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" onclick="scrollToTop()" alt="Logo">
+  </header>
+
+  <main>
+    <div class="center-btn">
+      <button onclick="showCategories()">Ürünler</button>
+    </div>
+
+    <div id="categories" class="categories" style="display:none;">
+      <button onclick="showProducts('mouse')">Mouse</button>
+      <button onclick="showProducts('klavye')">Klavye</button>
+      <button onclick="showProducts('mousepad')">Mousepad</button>
+    </div>
+
+    <div id="mouse" class="products">
+      <div class="product">
+        <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse">
+      </div>
+    </div>
+
+    <div id="klavye" class="products">
+      <div class="product">
+        <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye">
+      </div>
+    </div>
+
+    <div id="mousepad" class="products">
+      <div class="product">
+        <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad">
+      </div>
+    </div>
+
+    <div class="center-btn">
+      <button onclick="location.href='#hakkinda'">Hakkında</button>
+    </div>
+
+    <div id="hakkinda" style="margin: 50px; padding: 20px; background:#e0f7fa; border-radius:10px;">
+      <h2>Hakkımızda</h2>
+      <p>FragGear olarak oyuncular için en kaliteli ekipmanları sunmayı hedefliyoruz. Espor tutkunları için tasarlanmış ürünlerimizle hizmetinizdeyiz.</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>İletişim: tahacanoktar11@gmail.com | Tel: 0535 049 5006</p>
+    <p><a href="https://instagram.com">Instagram</a></p>
+  </footer>
+
+  <script>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showCategories() {
+      document.getElementById('categories').style.display = 'flex';
+      document.querySelectorAll('.products').forEach(p => p.style.display = 'none');
+      document.getElementById('categories').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function showProducts(category) {
+      document.querySelectorAll('.products').forEach(p => p.style.display = 'none');
+      document.getElementById(category).style.display = 'flex';
+      document.getElementById(category).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
