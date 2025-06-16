@@ -1,17 +1,20 @@
-document.getElementById("shopNow").addEventListener("click", function () {
-  document.getElementById("mouse").scrollIntoView({ behavior: "smooth" });
-});
+/* Sepete ekle ve Satın Al butonlarını aktifleştir */
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('.product').forEach(prod => {
+    let sepete = prod.querySelector('.sepete-ekle');
+    let satinAl = prod.querySelector('.satin-al');
 
-const backButton = document.getElementById("backButton");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 100) {
-    backButton.style.display = "block";
-  } else {
-    backButton.style.display = "none";
-  }
-});
-
-backButton.addEventListener("click", () => {
-  document.querySelector(".hero").scrollIntoView({ behavior: "smooth" });
+    if (sepete) {
+      sepete.addEventListener('click', e => {
+        e.preventDefault();
+        alert(prod.querySelector('p').innerText + " sepete eklendi!");
+      });
+    }
+    if (satinAl) {
+      satinAl.addEventListener('click', e => {
+        e.preventDefault();
+        alert(prod.querySelector('p').innerText + " satın alma işlemi başlatıldı!");
+      });
+    }
+  });
 });
