@@ -61,3 +61,7 @@ nav ul li a {
   border-radius: 50%;
   cursor: pointer;
 }
+
+#user-control {
+  display: none;
+}
