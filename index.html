@@ -1,444 +1,119 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>FRAGGEAR</title>
-<style>
-  :root {
-    --bg: #0a0a0a;
-    --text: #f0f0f0;
-    --accent: #00cfcf;
-    --footer: #111;
-  }
-  body {
-    margin: 0;
-    font-family: 'Helvetica Neue', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-  }
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(0,0,0,0.9);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 30px;
-    box-sizing: border-box;
-    z-index: 1000;
-  }
-  nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  nav a, .user-btn {
-    color: var(--accent);
-    text-decoration: none;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: color 0.3s, box-shadow 0.3s;
-  }
-  nav a:hover, .user-btn:hover {
-  color: #00ffff;
-  transform: scale(1.2);
-  transition: transform 0.3s, color 0.3s;
-}
-  }
-  section {
-    display: none;
-    padding: 100px 30px 60px;
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
-  }
-  section.active {
-    display: block;
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  h1 {
-    font-size: 4em;
-    margin-bottom: 10px;
-  }
-  .slogan {
-    font-size: 1.7em;
-    color: var(--accent);
-  }
-  .products-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    margin-top: 40px;
-  }
-  .product {
-    background: rgba(17, 17, 17, 0.85);
-    padding: 10px;
-    border-radius: 10px;
-    width: 220px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .product:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px var(--accent);
-  }
-  .product img {
-    width: 100%;
-    border-radius: 8px;
-  }
-  .product p {
-    margin: 10px 0 8px;
-    font-weight: bold;
-  }
-  /* Yeni butonlar */
-  .btn-action {
-    margin-top: auto;
-    background: var(--accent);
-    color: var(--bg);
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: box-shadow 0.3s, transform 0.2s;
-  }
- .btn-action:hover {
-  box-shadow: 0 0 20px #00ffff;
-  transform: scale(1.1);
-}
-
-.btn-action.buy:hover {
-  background: #00ffff;
-  box-shadow: 0 0 20px #00ffff;
-  transform: scale(1.1);
-}
-
-  /* Back butonları için neon efekt */
-  .back-btn {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: var(--accent);
-    color: var(--bg);
-    border-radius: 6px;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    font-weight: bold;
-    transition: box-shadow 0.3s, transform 0.3s;
-  }
-  .back-btn:hover {
-    box-shadow: 0 0 25px var(--accent);
-    transform: scale(1.05);
-  }
-
-  /* Footer sayfanın en altında */
-  footer {
-    background: var(--footer);
-    color: #888;
-    padding: 20px;
-    font-size: 0.9em;
-    text-align: center;
-    width: 100%;
-    margin-top: 40px;
-  }
-
-  /* Basit modal stil - hesap için */
-  .modal-bg {
-    position: fixed;
-    top: 0; left: 0; right:0; bottom: 0;
-    background: rgba(0,0,0,0.8);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-  }
-  .modal-bg.active {
-    display: flex;
-  }
-  .modal {
-    background: var(--bg);
-    padding: 30px;
-    border-radius: 12px;
-    width: 320px;
-    box-sizing: border-box;
-    color: var(--text);
-  }
-  .modal h3 {
-    margin-top: 0;
-  }
-  .modal input {
-    width: 100%;
-    padding: 8px 10px;
-    margin: 10px 0 20px;
-    border-radius: 6px;
-    border: none;
-    outline: none;
-    font-size: 1em;
-  }
-  .modal button {
-    width: 100%;
-    padding: 10px;
-    background: var(--accent);
-    border: none;
-    border-radius: 6px;
-    color: var(--bg);
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .modal button:hover {
-    background: #00ffff;
-  }
-  .close-btn {
-    background: transparent;
-    color: var(--accent);
-    border: none;
-    font-size: 1.2em;
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    cursor: pointer;
-  }
-  .user-area {
-    color: var(--accent);
-    font-weight: bold;
-    cursor: default;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Site</title>
+  <style>
+    .active { display: block; }
+    section { display: none; }
+    .user-btn { cursor: pointer; margin-left: 10px; }
+  </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <a href="#" onclick="showSection('products')">ÜRÜNLER</a>
-    <a href="#" onclick="showSection('about')">HAKKINDA</a>
-  </nav>
-  <a href="#" onclick="showSection('home')">
-    <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/BDE3B096-9F7B-4C89-A658-B65A261ECE9E.png" alt="FRAGGEAR Logo" style="height:60px">
-  </a>
-  <nav>
-    <a href="#" onclick="showSection('contact')">İLETİŞİM</a>
-    <a href="#" onclick="showSection('support')">MÜŞTERİ HİZMETLERİ</a>
-
-    <span id="user-control">
+  <header>
+    <nav>
+      <a onclick="navigate('home')">Ana Sayfa</a>
+      <a onclick="navigate('about')">Hakkımızda</a>
+      <a onclick="navigate('contact')">İletişim</a>
+    </nav>
+    <div id="user-control">
       <a class="user-btn" onclick="openModal('login')">Giriş Yap</a>
       <a class="user-btn" onclick="openModal('register')">Kayıt Ol</a>
-    </span>
-  </nav>
-</header>
+    </div>
+  </header>
 
-<section id="home" class="active">
-  <h1>FRAGGEAR</h1>
-  <p class="slogan">DESIGNED FOR CHAMPIONS</p>
-</section>
+  <section id="home" class="active">Ana Sayfa İçeriği</section>
+  <section id="about">Hakkımızda İçeriği</section>
+  <section id="contact">İletişim İçeriği</section>
 
-<section id="products">
-  <h2>ÜRÜN KATEGORİLERİ</h2>
-  <div class="products-list">
-    <div class="product" onclick="loadCategory('klavye')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png" alt="Klavye" />
-      <p>Klavye</p>
-    </div>
-    <div class="product" onclick="loadCategory('mouse')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp" alt="Mouse" />
-      <p>Mouse</p>
-    </div>
-    <div class="product" onclick="loadCategory('mousepad')">
-      <img src="https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg" alt="Mousepad" />
-      <p>Mousepad</p>
-    </div>
+  <div id="modal" style="display: none;">
+    <div id="modal-content"></div>
+    <button onclick="closeModal()">Kapat</button>
   </div>
-</section>
 
-<section id="about">
-  <h2>HAKKINDA</h2>
-  <p>FRAGGEAR esporcular için premium donanım sunar. Kalite ve performansın ötesinde.</p>
-  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
-</section>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tüm section'ları gizle
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      // Sadece home göster
+      document.getElementById('home').classList.add('active');
 
-<section id="contact">
-  <h2>İLETİŞİM</h2>
-  <p>Telefon: 0535 049 5006</p>
-  <p>Email: tahacanoktar11@gmail.com</p>
-  <p>Instagram: <a href="https://instagram.com/" target="_blank" style="color:var(--accent);">@fraggear</a></p>
-  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
-</section>
-
-<section id="support">
-  <h2>MÜŞTERİ HİZMETLERİ</h2>
-  <p>Her türlü soru ve destek için bize ulaşabilirsiniz.</p>
-  <a href="#" class="back-btn" onclick="showSection('home')">Ana Menüye Dön</a>
-</section>
-
-<section id="category-page">
-  <h2 id="cat-title"></h2>
-  <div class="products-list" id="cat-products"></div>
-  <a href="#" class="back-btn" onclick="showSection('products')">Ürün Kategorilerine Dön</a>
-</section>
-
-<footer>
-  &copy; 2025 FRAGGEAR | Tüm hakları saklıdır.
-</footer>
-
-<!-- Modal for login/register -->
-<div id="modal-bg" class="modal-bg" onclick="closeModal(event)">
-  <div class="modal" onclick="event.stopPropagation()">
-    <button class="close-btn" onclick="closeModal()">×</button>
-    <div id="login-form">
-      <h3>Giriş Yap</h3>
-      <input type="text" id="login-username" placeholder="Kullanıcı Adı" />
-      <input type="password" id="login-password" placeholder="Şifre" />
-      <button onclick="login()">Giriş Yap</button>
-    </div>
-    <div id="register-form" style="display:none;">
-      <h3>Kayıt Ol</h3>
-      <input type="text" id="reg-username" placeholder="Kullanıcı Adı" />
-      <input type="password" id="reg-password" placeholder="Şifre" />
-      <button onclick="register()">Kayıt Ol</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Show section
-  function showSection(id) {
-    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-
-  // Load products in category with sepete ekle ve satın al butonu
-  function loadCategory(cat) {
-    const data = {
-      klavye: [
-        {title: 'Gaming Klavye', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0569.png'}
-      ],
-      mouse: [
-        {title: 'Gaming Mouse', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0570.webp'}
-      ],
-      mousepad: [
-        {title: 'Gaming Mousepad', img: 'https://raw.githubusercontent.com/sNas61/Fraggear/main/IMG_0576.jpeg'}
-      ]
-    };
-    document.getElementById('cat-title').innerText = cat.toUpperCase();
-    const container = document.getElementById('cat-products');
-    container.innerHTML = '';
-    data[cat].forEach(p => {
-      const div = document.createElement('div');
-      div.className = 'product';
-      div.innerHTML = `
-        <img src="${p.img}" alt="${p.title}">
-        <p>${p.title}</p>
-        <button class="btn-action add-to-cart" onclick="addToCart('${p.title}')">Sepete Ekle</button>
-        <button class="btn-action buy" onclick="buyNow('${p.title}')">Satın Al</button>
-      `;
-      container.appendChild(div);
+      // Kullanıcı session'da varsa yükle
+      const loggedUser = sessionStorage.getItem('loggedUser');
+      if (loggedUser) {
+        setUser(loggedUser);
+      }
     });
-    showSection('category-page');
-  }
 
-  // Sepete ekle efekti + alert demo
-  function addToCart(item) {
-    alert(`${item} sepete eklendi!`);
-  }
-
-  // Satın al demo alert
-  function buyNow(item) {
-    alert(`${item} satın alma sayfasına yönlendiriliyor...`);
-  }
-
-  // Modal kontrol
-  function openModal(form) {
-    document.getElementById('modal-bg').classList.add('active');
-    if(form === 'login') {
-      document.getElementById('login-form').style.display = 'block';
-      document.getElementById('register-form').style.display = 'none';
-    } else {
-      document.getElementById('login-form').style.display = 'none';
-      document.getElementById('register-form').style.display = 'block';
+    function navigate(pageId) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
     }
-  }
-  function closeModal(e) {
-    if(!e || e.target.id === 'modal-bg' || e.target.className === 'close-btn') {
-      document.getElementById('modal-bg').classList.remove('active');
-    }
-  }
 
-  // Basit kullanıcı kaydı ve oturum açma demo (localStorage)
-  function register() {
-    const username = document.getElementById('reg-username').value.trim();
-    const password = document.getElementById('reg-password').value.trim();
-    if(!username || !password) {
-      alert('Lütfen kullanıcı adı ve şifre girin!');
-      return;
+    function setUser(username) {
+      sessionStorage.setItem('loggedUser', username);
+      const userControl = document.getElementById('user-control');
+      userControl.innerHTML = `
+        <span class="user-area">Merhaba, ${username}</span>
+        <a class="user-btn" onclick="logout()">Çıkış Yap</a>
+      `;
     }
-    if(localStorage.getItem('user_' + username)) {
-      alert('Bu kullanıcı adı zaten kayıtlı!');
-      return;
-    }
-    localStorage.setItem('user_' + username, password);
-    alert('Kayıt başarılı! Giriş yapabilirsiniz.');
-    openModal('login');
-  }
-  function login() {
-    const username = document.getElementById('login-username').value.trim();
-    const password = document.getElementById('login-password').value.trim();
-    if(!username || !password) {
-      alert('Lütfen kullanıcı adı ve şifre girin!');
-      return;
-    }
-    const storedPass = localStorage.getItem('user_' + username);
-    if(storedPass && storedPass === password) {
-      alert('Hoşgeldin, ' + username);
-      closeModal();
-      setUser(username);
-    } else {
-      alert('Kullanıcı adı veya şifre yanlış!');
-    }
-  }
 
-  // Kullanıcı oturum kontrolü
-  function setUser(username) {
-    const userControl = document.getElementById('user-control');
-    userControl.innerHTML = `
-      <span class="user-area">Merhaba, ${username}</span>
-      <a class="user-btn" onclick="logout()">Çıkış Yap</a>
-    `;
-  }
-  function logout() {
-    alert('Çıkış yapıldı!');
-    const userControl = document.getElementById('user-control');
-    userControl.innerHTML = `
-      <a class="user-btn" onclick="openModal('login')">Giriş Yap</a>
-      <a class="user-btn" onclick="openModal('register')">Kayıt Ol</a>
-    `;
-  }
-
-  // Sayfa yüklendiğinde kontrol
-  document.addEventListener('DOMContentLoaded', () => {
-    // Eğer sessionStorage'da kullanıcı varsa otomatik giriş yap
-    const loggedUser = sessionStorage.getItem('loggedUser');
-    if(loggedUser) {
-      setUser(loggedUser);
+    function logout() {
+      alert('Çıkış yapıldı!');
+      sessionStorage.removeItem('loggedUser');
+      const userControl = document.getElementById('user-control');
+      userControl.innerHTML = `
+        <a class="user-btn" onclick="openModal('login')">Giriş Yap</a>
+        <a class="user-btn" onclick="openModal('register')">Kayıt Ol</a>
+      `;
     }
-  });
 
-</script>
+    function openModal(type) {
+      const modal = document.getElementById('modal');
+      const content = document.getElementById('modal-content');
+      modal.style.display = 'block';
 
+      if (type === 'login') {
+        content.innerHTML = `
+          <h2>Giriş Yap</h2>
+          <input id="username-login" placeholder="Kullanıcı Adı">
+          <button onclick="handleLogin()">Giriş</button>
+        `;
+      } else if (type === 'register') {
+        content.innerHTML = `
+          <h2>Kayıt Ol</h2>
+          <input id="username-register" placeholder="Kullanıcı Adı">
+          <button onclick="handleRegister()">Kayıt</button>
+        `;
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    function handleLogin() {
+      const username = document.getElementById('username-login').value.trim();
+      if (username) {
+        setUser(username);
+        closeModal();
+      } else {
+        alert('Kullanıcı adı gir!');
+      }
+    }
+
+    function handleRegister() {
+      const username = document.getElementById('username-register').value.trim();
+      if (username) {
+        setUser(username);
+        closeModal();
+      } else {
+        alert('Kullanıcı adı gir!');
+      }
+    }
+  </script>
 </body>
 </html>
