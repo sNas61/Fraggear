@@ -117,13 +117,16 @@
     cursor: pointer;
     transition: box-shadow 0.3s, transform 0.2s;
   }
-  .btn-action:hover {
-    box-shadow: 0 0 20px var(--accent);
-    transform: scale(1.1);
-  }
-  .btn-action.buy {
-    background: #00aaff;
-  }
+ .btn-action:hover {
+  box-shadow: 0 0 20px #00ffff;
+  transform: scale(1.1);
+}
+
+.btn-action.buy:hover {
+  background: #00ffff;
+  box-shadow: 0 0 20px #00ffff;
+  transform: scale(1.1);
+}
 
   /* Back butonları için neon efekt */
   .back-btn {
